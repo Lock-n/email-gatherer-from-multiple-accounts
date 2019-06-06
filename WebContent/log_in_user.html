@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<script>
+
+function correto()
+{
+	if((document.getElementById("nome").value == "") || (document.getElementById("senha").value == ""))
+	{
+		alert("PREENCHA TODOS OS CAMPOS!");
+		return;
+	}
+
+		
+}
+
+</script>
+	
+	  <form method="get" action="Login.jsp"> 
+
+		<label>Nome:</label> 
+		<input type="text" id="nome" name="nome">
+		<br/>
+		<label>Senha:</label> 
+		<input type="password" id="senha" name="senha">
+		<br/>
+		<br>
+		<button onclick="correto()">Login</button>
+		
+	 </form> 
+	
+
+
+</body>
+</html>
