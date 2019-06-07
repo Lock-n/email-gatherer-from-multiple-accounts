@@ -18,6 +18,9 @@
      	EmailAccount contaE = new EmailAccount(email, password, server_address, server_protocol, server_port);
      	
      	EmailAccounts.incluir(contaE);
+     	
+     	HttpSession sessao = request.getSession();
+     	String nome = sessao.getAttribute(“nome”);
      	//ligar a conta adicionada com o usuario que a adicionou, USAR A SESSION AQUI
 	%>
 

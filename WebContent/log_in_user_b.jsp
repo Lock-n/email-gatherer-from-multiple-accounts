@@ -22,6 +22,8 @@
 				<p> LOGIN BEM SUCEDIDO!
 				<%
 				//iniciar uma session para o usuario logado
+				HttpSession sessao = request.getSession(true);
+				sessao.setAttribute("nome", nome);
 			}
 			else
 			{
