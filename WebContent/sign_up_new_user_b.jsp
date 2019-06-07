@@ -10,12 +10,12 @@
 	<p> Por favor aguarde...</p>
 	<%
 		try{
-			String nome  = request.getParameter("nome");
-			String senha = request.getParameter("senha");
+			String nome  = request.getParameter("name");
+			String senha = request.getParameter("password");
 		
-			Usuario usuario= new Usuario(nome, senha);
+			User usuario= new User(nome, senha);
 			
-			Usuarios.incluir(usuario);
+			Users.incluir(usuario);
 		}
 		catch(Exception erro){
 			erro.printStackTrace();

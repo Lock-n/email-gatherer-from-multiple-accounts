@@ -5,9 +5,9 @@ import bd.*;
 import bd.core.*;
 import bd.dbos.*;
 
-public class Usuarios
+public class Users
 {
-    public static boolean cadastrado (String nome) throws Exception
+    public static boolean cadastrado (String name) throws Exception
     {
         boolean retorno = false;
 
@@ -16,12 +16,12 @@ public class Usuarios
             String sql;
 
             sql = "SELECT * " +
-                  "FROM USUARIO " +
-                  "WHERE NOME = ?";
+                  "FROM TDI_project_User " +
+                  "WHERE NAME = ?";
 
             BDSQLServer.COMANDO.prepareStatement (sql);
 
-            BDSQLServer.COMANDO.setString (1, nome);
+            BDSQLServer.COMANDO.setString (1, name);
 
             MeuResultSet resultado = (MeuResultSet)BDSQLServer.COMANDO.executeQuery ();
 
@@ -32,12 +32,12 @@ public class Usuarios
             String sql;
 
              sql = "SELECT * " +
-                  "FROM USUARIO " +
-                  "WHERE NOME = ?";
+                  "FROM TDI_project_User " +
+                  "WHERE NAME = ?";
                   
             BDSQLServer.COMANDO.prepareStatement (sql);
 
-            BDSQLServer.COMANDO.setString (1, nome);
+            BDSQLServer.COMANDO.setString (1, name);
 
             MeuResultSet resultado = (MeuResultSet)BDSQLServer.COMANDO.executeQuery ();
 
@@ -55,24 +55,24 @@ public class Usuarios
         return retorno;
     }
 
-    public static void incluir (Usuario usuario) throws Exception
+    public static void incluir (User usuario) throws Exception
     {
         if (usuario==null)
-            throw new Exception ("Usuario nao fornecido");
+            throw new Exception ("User nao fornecido");
 
         try
         {
             String sql;
 
-            sql = "INSERT INTO Usuario " +
-                  "(NOME,SENHA) " +
+            sql = "INSERT INTO User " +
+                  "(NAME,PASSWORD) " +
                   "VALUES " +
                   "(?,?)";
 
             BDSQLServer.COMANDO.prepareStatement (sql);
 
-            BDSQLServer.COMANDO.setString (1, usuario.getNome ());
-            BDSQLServer.COMANDO.setString (2, usuario.getSenha ());
+            BDSQLServer.COMANDO.setString (1, usuario.getName ());
+            BDSQLServer.COMANDO.setString (2, usuario.getPassword ());
             
 
             BDSQLServer.COMANDO.executeUpdate ();
@@ -84,21 +84,21 @@ public class Usuarios
         }
     }
 
-    public static void excluir (String nome) throws Exception
+    public static void excluir (String name) throws Exception
     {
-        if (!cadastrado (nome))
-            throw new Exception ("Usuario nao cadastrado");
+        if (!cadastrado (name))
+            throw new Exception ("User nao cadastrado");
 
         try
         {
             String sql;
 
-            sql = "DELETE FROM USUARIO " +
-                  "WHERE NOME=?";
+            sql = "DELETE FROM TDI_project_User " +
+                  "WHERE NAME=?";
 
             BDSQLServer.COMANDO.prepareStatement (sql);
 
-            BDSQLServer.COMANDO.setString (1, nome);
+            BDSQLServer.COMANDO.setString (1, name);
 
             BDSQLServer.COMANDO.executeUpdate ();
             BDSQLServer.COMANDO.commit        ();        }
@@ -108,26 +108,26 @@ public class Usuarios
         }
     }
 
-    public static void alterar (Usuario usuario) throws Exception
+    public static void alterar (User usuario) throws Exception
     {
         if (usuario==null)
-            throw new Exception ("Usuario nao fornecido");
+            throw new Exception ("User nao fornecido");
 
-        if (!cadastrado (usuario.getNome()))
-            throw new Exception ("Usuario nao cadastrado");
+        if (!cadastrado (usuario.getName()))
+            throw new Exception ("User nao cadastrado");
 
         try
         {
             String sql;
 
-            sql = "UPDATE USUARIO " +
-                  "SET SENHA=? " +
-                  "WHERE NOME = ?";
+            sql = "UPDATE TDI_project_User " +
+                  "SET PASSWORD=? " +
+                  "WHERE NAME = ?";
 
             BDSQLServer.COMANDO.prepareStatement (sql);
 
-            BDSQLServer.COMANDO.setString (1, usuario.getSenha ());
-            BDSQLServer.COMANDO.setString (2, usuario.getNome ());
+            BDSQLServer.COMANDO.setString (1, usuario.getPassword ());
+            BDSQLServer.COMANDO.setString (2, usuario.getName ());
             
 
             BDSQLServer.COMANDO.executeUpdate ();
@@ -139,29 +139,29 @@ public class Usuarios
         }
     }
 
-    public static Usuario getUsuario (String nome) throws Exception
+    public static User getUser (String name) throws Exception
     {
-        Usuario usuario = null;
+        User usuario = null;
 
         try
         {
             String sql;
 
             sql = "SELECT * " +
-                  "FROM USUARIO " +
-                  "WHERE NOME = ?";
+                  "FROM TDI_project_User " +
+                  "WHERE NAME = ?";
 
             BDSQLServer.COMANDO.prepareStatement (sql);
 
-            BDSQLServer.COMANDO.setString (1,nome);
+            BDSQLServer.COMANDO.setString (1,name);
 
             MeuResultSet resultado = (MeuResultSet)BDSQLServer.COMANDO.executeQuery ();
 
             if (!resultado.first())
-                throw new Exception ("Usuario nao cadastrado");
+                throw new Exception ("User nao cadastrado");
 
-            usuario = new Usuario (resultado.getString("NOME"),
-                                   resultado.getString("SENHA"));
+            usuario = new User (resultado.getString("name"),
+                                   resultado.getString("password"));
         }
         catch (SQLException erro)
         {
@@ -171,7 +171,7 @@ public class Usuarios
         return usuario;
     }
 
-    public static MeuResultSet getUsuarios () throws Exception
+    public static MeuResultSet getUsers () throws Exception
     {
         MeuResultSet resultado = null;
 
@@ -180,7 +180,7 @@ public class Usuarios
             String sql;
 
             sql = "SELECT * " +
-                  "FROM USUARIO";
+                  "FROM TDI_project_User";
 
             BDSQLServer.COMANDO.prepareStatement (sql);
 
@@ -194,7 +194,7 @@ public class Usuarios
         return resultado;
     }
     
-    public static MeuResultSet getContasUsuario(String nome)throws Exception
+    public static MeuResultSet getContasUser(String name)throws Exception
     {
     	MeuResultSet resultado = null;
 
@@ -203,11 +203,10 @@ public class Usuarios
             String sql;
 
             sql = "SELECT * " +
-                  "FROM ContaEmail where login = ContasUsuario.login in(select login from ContasUsuario where nome=?)";
-            //verificar esse select
+                  "FROM TDI_project_Email_Account where email = TDI_project_User_Email_Accounts.email and TDI_project_User_Email_Accounts.name_user = ?";
             BDSQLServer.COMANDO.prepareStatement (sql);
             
-            BDSQLServer.COMANDO.setString (1,nome);
+            BDSQLServer.COMANDO.setString (1,name);
 
             resultado = (MeuResultSet)BDSQLServer.COMANDO.executeQuery ();
         }

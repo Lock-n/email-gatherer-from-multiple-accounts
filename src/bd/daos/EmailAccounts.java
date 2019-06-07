@@ -8,9 +8,9 @@ import bd.*;
 import bd.core.*;
 import bd.dbos.*;
 
-public class ContasEmails
+public class EmailAccounts
 {
-    public static boolean cadastrado (String login) throws Exception
+    public static boolean cadastrado (String email) throws Exception
     {
         boolean retorno = false;
 
@@ -19,12 +19,12 @@ public class ContasEmails
             String sql;
 
             sql = "SELECT * " +
-                  "FROM ContaEmail " +
-                  "WHERE Login = ?";
+                  "FROM TDI_project_User_Email_Accounts " +
+                  "WHERE Email = ?";
 
             BDSQLServer.COMANDO.prepareStatement (sql);
 
-            BDSQLServer.COMANDO.setString (1, login);
+            BDSQLServer.COMANDO.setString (1, email);
 
             MeuResultSet resultado = (MeuResultSet)BDSQLServer.COMANDO.executeQuery ();
 
@@ -58,7 +58,7 @@ public class ContasEmails
         return retorno;
     }
 
-    public static void incluir (ContaEmail contaE) throws Exception
+    public static void incluir (EmailAccount contaE) throws Exception
     {
         if (contaE==null)
             throw new Exception ("Conta nao fornecido");
@@ -67,21 +67,18 @@ public class ContasEmails
         {
             String sql;
 
-            sql = "INSERT INTO ContaEmail " +
-                  "(LOGIN, SENHA, endServEnv, protEnv, portEnv, endServRec, protRec, portRec) " +
+            sql = "INSERT INTO TDI_project_User_Email_Accounts " +
+                  "(email, password, server_address, server_protocol, server_port) " +
                   "VALUES " +
-                  "(?,?,?,?,?,?,?,?)";
+                  "(?,?,?,?,?)";
 
             BDSQLServer.COMANDO.prepareStatement (sql);
 
-            BDSQLServer.COMANDO.setString (1, contaE.getLogin       ());
-            BDSQLServer.COMANDO.setString (2, contaE.getSenha       ());
-            BDSQLServer.COMANDO.setString (3, contaE.getEndServEnv  ());
-            BDSQLServer.COMANDO.setString (4, contaE.getProtEnv     ());
-            BDSQLServer.COMANDO.setInt    (5, contaE.getPortEnv     ());
-            BDSQLServer.COMANDO.setString (6, contaE.getEndServRec  ());
-            BDSQLServer.COMANDO.setString (7, contaE.getProtRec     ());
-            BDSQLServer.COMANDO.setInt    (8, contaE.getPortRec     ());
+            BDSQLServer.COMANDO.setString (1, contaE.getEmail       ());
+            BDSQLServer.COMANDO.setString (2, contaE.getPassword       ());
+            BDSQLServer.COMANDO.setString (3, contaE.getServer_address  ());
+            BDSQLServer.COMANDO.setString (4, contaE.getServer_protocol     ());
+            BDSQLServer.COMANDO.setInt    (5, contaE.getServer_port     ());
             
 
             BDSQLServer.COMANDO.executeUpdate ();
@@ -93,21 +90,21 @@ public class ContasEmails
         }
     }
 
-    public static void excluir (String login) throws Exception
+    public static void excluir (String email) throws Exception
     {
-        if (!cadastrado (login))
+        if (!cadastrado (email))
             throw new Exception ("Conta nao cadastrada");
 
         try
         {
             String sql;
 
-            sql = "DELETE FROM ContaEmail " +
-                  "WHERE LOGIN=?";
+            sql = "DELETE FROM TDI_project_User_Email_Accounts " +
+                  "WHERE email=?";
 
             BDSQLServer.COMANDO.prepareStatement (sql);
 
-            BDSQLServer.COMANDO.setString (1, login);
+            BDSQLServer.COMANDO.setString (1, email);
 
             BDSQLServer.COMANDO.executeUpdate ();
             BDSQLServer.COMANDO.commit        ();        }
@@ -117,33 +114,29 @@ public class ContasEmails
         }
     }
 
-    public static void alterar (ContaEmail contaE) throws Exception
+    public static void alterar (EmailAccount contaE) throws Exception
     {
         if (contaE==null)
             throw new Exception ("Conta nao fornecida");
 
-        if (!cadastrado (contaE.getLogin()))
+        if (!cadastrado (contaE.getEmail()))
             throw new Exception ("Conta nao cadastrada");
 
         try
         {
             String sql;
 
-            sql = "UPDATE USUARIO " +
-                  "SET SENHA=?,SET endServEnv=?,SET protEnv=?,SET portEnv=?,"+
-                  "SET endServRec=?, SET protRec=?, SET portRec=?" +
-                  "WHERE Login = ?";
+            sql = "UPDATE TDI_project_Email_Account " +
+                  "SET password=?,SET server_address=?,SET server_protocol=?,SET server_port=?,"+
+                  "WHERE email = ?";
 
             BDSQLServer.COMANDO.prepareStatement (sql);
 
-            BDSQLServer.COMANDO.setString (1, contaE.getSenha       ());
-            BDSQLServer.COMANDO.setString (2, contaE.getEndServEnv  ());
-            BDSQLServer.COMANDO.setString (3, contaE.getProtEnv     ());
-            BDSQLServer.COMANDO.setInt    (4, contaE.getPortEnv     ());
-            BDSQLServer.COMANDO.setString (5, contaE.getEndServRec  ());
-            BDSQLServer.COMANDO.setString (6, contaE.getProtRec     ());
-            BDSQLServer.COMANDO.setInt    (7, contaE.getPortRec     ());
-            BDSQLServer.COMANDO.setString (8, contaE.getLogin       ());
+            BDSQLServer.COMANDO.setString (1, contaE.getPassword       ());
+            BDSQLServer.COMANDO.setString (2, contaE.getServer_address  ());
+            BDSQLServer.COMANDO.setString (3, contaE.getServer_protocol     ());
+            BDSQLServer.COMANDO.setInt    (4, contaE.getServer_port     ());
+            BDSQLServer.COMANDO.setString (5, contaE.getEmail       ());
             
 
             BDSQLServer.COMANDO.executeUpdate ();
@@ -155,21 +148,21 @@ public class ContasEmails
         }
     }
 
-    public static ContaEmail getContaEmail (String login) throws Exception
+    public static EmailAccount getTDI_project_User_Email_Accounts (String email) throws Exception
     {
-        ContaEmail contaE = null;
+        EmailAccount contaE = null;
 
         try
         {
             String sql;
 
             sql = "SELECT * " +
-                  "FROM ContaEmail " +
-                  "WHERE login = ?";
+                  "FROM TDI_project_User_Email_Accounts " +
+                  "WHERE email = ?";
 
             BDSQLServer.COMANDO.prepareStatement (sql);
 
-            BDSQLServer.COMANDO.setString (1, login);
+            BDSQLServer.COMANDO.setString (1, email);
 
             MeuResultSet resultado = (MeuResultSet)BDSQLServer.COMANDO.executeQuery ();
 
@@ -177,10 +170,9 @@ public class ContasEmails
                 throw new Exception ("Usuario nao cadastrado");
 
             
-            contaE = new ContaEmail (resultado.getString("LOGIN"), resultado.getString("SENHA"), 
-                                    resultado.getString("endServEnv"), resultado.getString("protEnv"),
-                                    resultado.getInt("portEnv"), resultado.getString("endServRec"),
-                                    resultado.getString("protRec"), resultado.getInt("portRec"));
+            contaE = new EmailAccount (resultado.getString("email"), resultado.getString("password"), 
+                                    resultado.getString("server_address"), resultado.getString("server_protocol"),
+                                    resultado.getInt("server_port"));
         }
         catch (SQLException erro)
         {
@@ -199,7 +191,7 @@ public class ContasEmails
             String sql;
 
             sql = "SELECT * " +
-                  "FROM ContaEmail";
+                  "FROM TDI_project_User_Email_Accounts";
 
             BDSQLServer.COMANDO.prepareStatement (sql);
 
