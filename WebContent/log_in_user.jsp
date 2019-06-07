@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +23,7 @@ function correto()
 
 </script>
 	
-	  <form method="get" action="Login.jsp"> 
+	  <form method="post" action="log_in_user_b.jsp"> 
 
 		<label>Nome:</label> 
 		<input type="text" id="nome" name="nome">

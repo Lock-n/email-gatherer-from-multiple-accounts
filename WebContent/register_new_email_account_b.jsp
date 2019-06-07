@@ -9,10 +9,10 @@
 <body>
 
 	<%
-	 	String email      = request.getParameter("email");
-     	String password      = request.getParameter("password");
+	 	String email = request.getParameter("email");
+     	String password = request.getParameter("password");
      	String server_address = request.getParameter("server_address"); 				// endereco do servidor de env
-     	String server_protocol    = request.getParameter("server_protocol");					// protocolo de envio 
+     	String server_protocol = request.getParameter("server_protocol");					// protocolo de envio 
      	int    server_port    = Integer.parseInt(request.getParameter("server_port"));	// porta de envio
 			
      	EmailAccount contaE = new EmailAccount(email, password, server_address, server_protocol, server_port);
