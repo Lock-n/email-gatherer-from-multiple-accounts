@@ -7,6 +7,7 @@ public class EmailAccount implements Cloneable
     private String server_address;  // endereco do servidor de env
     private String server_protocol;		// protocolo de envio 
     private int    server_port;		// porta de envio
+    private String name_user;        //nome do dono da conta
     
     
      
@@ -44,6 +45,13 @@ public class EmailAccount implements Cloneable
             throw new Exception ("Porta de envio invalida");
 		this.server_port = server_port;
 	}
+    
+    public void setnameUser(String name_user)throws Exception
+	{
+		if (name_user==null || name_user.equals(""))
+            throw new Exception ("nome de usuario não fornecido");
+		this.name_user = name_user;
+	}
 
     public String getEmail() {
 		return this.email;
@@ -64,14 +72,19 @@ public class EmailAccount implements Cloneable
 	public int getServer_port() {
 		return this.server_port;
 	}
+    
+    public String getNameUser() {
+		return this.name_user;
+	}
 
-    public EmailAccount(String email, String password, String server_address, String server_protocol, int server_port)
+    public EmailAccount(String email, String password, String server_address, String server_protocol, int server_port, String name_user)
     {
-		this.email      = email;
-		this.password      = password;
-		this.server_address = server_address;
-		this.server_protocol    = server_protocol;
-		this.server_port    = server_port;
+		this.email                = email;
+		this.password             = password;
+		this.server_address       = server_address;
+		this.server_protocol      = server_protocol;
+		this.server_port          = server_port;
+        this.name_user          = name_user;
 	}
 
 	public String toString() 
@@ -82,6 +95,7 @@ public class EmailAccount implements Cloneable
 				ret+=  "\n server_address=" + server_address;
 				ret+=  "\n server_protocol=" + server_protocol;
 				ret+=  "\n server_port=" + server_port;
+                ret+=  "\n name_user=" + name_user;
 		
 		return ret;
 	}
@@ -95,6 +109,7 @@ public class EmailAccount implements Cloneable
 		ret = 7 * ret + server_address.hashCode();
 		ret = 7 * ret + server_protocol.hashCode();
 		ret = 7 * ret + new Integer(server_port).hashCode();
+        ret = 7 * ret + name_user.hashCode();
 		
 		return ret;
 	}
@@ -124,6 +139,9 @@ public class EmailAccount implements Cloneable
 		
 		if (this.server_port != conEmail.server_port)
 			return false;
+            
+        if (!this.name_user.equals(conEmail.name_user))
+			 return false;
 		
 		return true;
 	}
@@ -137,6 +155,7 @@ public class EmailAccount implements Cloneable
     	this.server_address = modelo.server_address;	// nao clono, pq nao eh clonavel
     	this.server_protocol    = modelo.server_protocol; 		// nao clono, pq nao eh clonavel
     	this.server_port    = modelo.server_port;		// nao clono, pq nao eh objeto
+        this.name_user    = modelo.name_user;
     }
 
     public Object clone ()
