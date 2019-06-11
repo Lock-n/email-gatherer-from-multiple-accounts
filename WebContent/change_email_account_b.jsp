@@ -16,7 +16,7 @@
           	String server_address   = request.getParameter("server_address"); 				// endereco do servidor de env
           	String server_protocol  = request.getParameter("server_protocol");					// protocolo de envio 
           	int    server_port      = Integer.parseInt(request.getParameter("server_port"));	// porta de envio
-     		String name_user        = session.getAttribute("name");// talvez tenha que ter request.getSession
+     		String name_user        = (String)session.getAttribute("name");// talvez tenha que ter request.getSession
 
           	EmailAccount contaE = new EmailAccount(email, password, server_address, server_protocol, server_port, name_user);
           	

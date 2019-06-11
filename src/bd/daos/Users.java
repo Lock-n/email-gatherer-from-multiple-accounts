@@ -64,7 +64,7 @@ public class Users
         {
             String sql;
 
-            sql = "INSERT INTO User " +
+            sql = "INSERT INTO TDI_project_User " +
                   "(NAME,PASSWORD) " +
                   "VALUES " +
                   "(?,?)";

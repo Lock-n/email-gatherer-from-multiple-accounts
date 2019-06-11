@@ -22,6 +22,7 @@ public class BDSQLServer
         catch (Exception erro)
         {
             System.err.println ("Problemas de conexao com o BD");
+            erro.printStackTrace();
             System.exit(1);
         }
         

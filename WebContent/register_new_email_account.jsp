@@ -9,13 +9,13 @@
 <body>
 
 
-	<form method="get" action="register_new_email_account_b.jsp">
+	<form method="post" action="register_new_email_account_b.jsp">
 
 		<label>Email:</label> 
 		<input type="text" id="email" name="email">
 		<br/>
 		<label>Senha:</label> 
-		<input type="password" id="senha" name="senha">
+		<input type="password" id="password" name="password">
 		<br/>
 		<label>Endereço do servidor de envio:</label> 
 		<input type="text" id="server_address" name="server_address">

@@ -10,7 +10,7 @@
 	<p> Por favor aguarde...</p>
 	<%
 		try{
-			String nome  = session.getAttribute("name");
+			String nome  = (String)session.getAttribute("name");
 			String senha = request.getParameter("nova_senha");
 		
 			User usuario= new User(nome, senha);

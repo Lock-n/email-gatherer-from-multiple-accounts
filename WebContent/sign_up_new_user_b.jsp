@@ -16,6 +16,8 @@
 			User usuario= new User(nome, senha);
 			
 			Users.incluir(usuario);
+			
+			response.sendRedirect("log_in_user.jsp");
 		}
 		catch(Exception erro){
 			erro.printStackTrace();

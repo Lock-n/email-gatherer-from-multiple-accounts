@@ -84,7 +84,7 @@ public class EmailAccount implements Cloneable
 		this.server_address       = server_address;
 		this.server_protocol      = server_protocol;
 		this.server_port          = server_port;
-        this.name_user          = name_user;
+        this.name_user            = name_user;
 	}
 
 	public String toString() 

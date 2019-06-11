@@ -15,10 +15,7 @@
 		<input type="text" id="email" name="email">
 		<br/>
 		<label>Nova senha:</label> 
-		<input type="password" id="senha" name="senha">
-		<br/>
-		<label>Novo endereço do servidor de envio:</label> 
-		<input type="text" id="server_address" name="server_address">
+		<input type="password" id="password" name="password">
 		<br/>
 		<label>Novo protocolo de envio:</label> 
 		<input type="text" id="server_protocol" name="server_protocol">
