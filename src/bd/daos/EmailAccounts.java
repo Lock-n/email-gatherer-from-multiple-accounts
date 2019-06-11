@@ -29,26 +29,6 @@ public class EmailAccounts
             MeuResultSet resultado = (MeuResultSet)BDSQLServer.COMANDO.executeQuery ();
 
             retorno = resultado.first(); // pode-se usar resultado.last() ou resultado.next() ou resultado.previous() ou resultado.absotule(numeroDaLinha)
-
-            /* // ou, se preferirmos,
-
-            String sql;
-
-             sql = "SELECT * " +
-                  "FROM USUARIO " +
-                  "WHERE NICK = ?";
-                  
-            BDSQLServer.COMANDO.prepareStatement (sql);
-
-            BDSQLServer.COMANDO.setString (1, nick);
-
-            MeuResultSet resultado = (MeuResultSet)BDSQLServer.COMANDO.executeQuery ();
-
-            resultado.first();
-
-            retorno = resultado.getInt("QUANTOS") != 0;
-
-            */
         }
         catch (SQLException erro)
         {
@@ -68,17 +48,18 @@ public class EmailAccounts
             String sql;
 
             sql = "INSERT INTO TDI_project_User_Email_Accounts " +
-                  "(email, password, server_address, server_protocol, server_port) " +
+                  "(email, password, server_address, server_protocol, server_port, name_user) " +
                   "VALUES " +
-                  "(?,?,?,?,?)";
+                  "(?,?,?,?,?,?)";
 
             BDSQLServer.COMANDO.prepareStatement (sql);
 
-            BDSQLServer.COMANDO.setString (1, contaE.getEmail       ());
-            BDSQLServer.COMANDO.setString (2, contaE.getPassword       ());
+            BDSQLServer.COMANDO.setString (1, contaE.getEmail           ());
+            BDSQLServer.COMANDO.setString (2, contaE.getPassword        ());
             BDSQLServer.COMANDO.setString (3, contaE.getServer_address  ());
-            BDSQLServer.COMANDO.setString (4, contaE.getServer_protocol     ());
+            BDSQLServer.COMANDO.setString (4, contaE.getServer_protocol ());
             BDSQLServer.COMANDO.setInt    (5, contaE.getServer_port     ());
+            BDSQLServer.COMANDO.setString (6, contaE.getName_user       ());    
             
 
             BDSQLServer.COMANDO.executeUpdate ();
@@ -127,16 +108,18 @@ public class EmailAccounts
             String sql;
 
             sql = "UPDATE TDI_project_Email_Account " +
-                  "SET password=?,SET server_address=?,SET server_protocol=?,SET server_port=?,"+
+                  "SET password=?,SET server_address=?,SET server_protocol=?,SET server_port=?, name_user=?,"+
                   "WHERE email = ?";
 
             BDSQLServer.COMANDO.prepareStatement (sql);
 
-            BDSQLServer.COMANDO.setString (1, contaE.getPassword       ());
+            BDSQLServer.COMANDO.setString (1, contaE.getPassword        ());
             BDSQLServer.COMANDO.setString (2, contaE.getServer_address  ());
-            BDSQLServer.COMANDO.setString (3, contaE.getServer_protocol     ());
+            BDSQLServer.COMANDO.setString (3, contaE.getServer_protocol ());
             BDSQLServer.COMANDO.setInt    (4, contaE.getServer_port     ());
-            BDSQLServer.COMANDO.setString (5, contaE.getEmail       ());
+            BDSQLServer.COMANDO.setString (5, contaE.getName_user       ());
+            BDSQLServer.COMANDO.setString (6, contaE.getEmail           ());
+
             
 
             BDSQLServer.COMANDO.executeUpdate ();
@@ -204,4 +187,32 @@ public class EmailAccounts
 
         return resultado;
     }
+
+
+        public static MeuResultSet getContasUser(String name)throws Exception
+    {
+        MeuResultSet resultado = null;
+
+        try
+        {
+            String sql;
+
+            sql = "SELECT * " +
+                  "FROM TDI_project_User_Email_Accounts WHERE name_user = ?";
+            BDSQLServer.COMANDO.prepareStatement (sql);
+            
+            BDSQLServer.COMANDO.setString (1,name);
+
+            resultado = (MeuResultSet)BDSQLServer.COMANDO.executeQuery ();
+        }
+        catch (SQLException erro)
+        {
+            throw new Exception ("Erro ao recuperar contas do usuario");
+        }
+
+        return resultado;
+    }
+
+
+
 }

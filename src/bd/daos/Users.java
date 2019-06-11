@@ -193,30 +193,4 @@ public class Users
 
         return resultado;
     }
-    
-    public static MeuResultSet getContasUser(String name)throws Exception
-    {
-    	MeuResultSet resultado = null;
-
-        try
-        {
-            String sql;
-
-            sql = "SELECT * " +
-                  "FROM TDI_project_Email_Account where email = TDI_project_User_Email_Accounts.email and TDI_project_User_Email_Accounts.name_user = ?";
-            BDSQLServer.COMANDO.prepareStatement (sql);
-            
-            BDSQLServer.COMANDO.setString (1,name);
-
-            resultado = (MeuResultSet)BDSQLServer.COMANDO.executeQuery ();
-        }
-        catch (SQLException erro)
-        {
-            throw new Exception ("Erro ao recuperar contas do usuario");
-        }
-
-        return resultado;
-    }
-    
-    
 }

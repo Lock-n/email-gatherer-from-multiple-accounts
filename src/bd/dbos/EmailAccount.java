@@ -46,7 +46,7 @@ public class EmailAccount implements Cloneable
 		this.server_port = server_port;
 	}
     
-    public void setnameUser(String name_user)throws Exception
+    public void setNameUser(String name_user)throws Exception
 	{
 		if (name_user==null || name_user.equals(""))
             throw new Exception ("nome de usuario não fornecido");
