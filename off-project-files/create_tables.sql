@@ -1,9 +1,3 @@
-drop table TDI_project_Email_Account
-drop table TDI_project_User
-
-select * from TDI_project_Email_Account
-select * from TDI_project_User
-
 create table TDI_project_User(
 	name varchar(100)    primary key,
 	password varchar(50) not null
