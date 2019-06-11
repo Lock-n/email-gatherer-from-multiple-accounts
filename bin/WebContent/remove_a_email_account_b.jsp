@@ -14,7 +14,7 @@
      	 	String email = request.getParameter("email");
           	
           	EmailAccounts.excluir(email);
-          	response.sendRedirect("hub.jsp");
+
      	}
           catch(Exception erro){
                erro.printStackTrace();

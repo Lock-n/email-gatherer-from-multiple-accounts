@@ -10,19 +10,20 @@
 	<p> Por favor aguarde...</p>
 	<%
 		try{
-			String nome  = (String)session.getAttribute("name");
-			String senha = request.getParameter("nova_senha");
+			String nome  = request.getParameter("nome");
+			String senha = request.getParameter("senha");
 		
 			User usuario= new User(nome, senha);
 			
-			Users.alterar(usuario);
-			response.sendRedirect("hub.jsp");
+			Users.incluir(usuario);
+			
+			response.sendRedirect("log_in_user.jsp");
 		}
 		catch(Exception erro){
 			erro.printStackTrace();
 			response.sendRedirect("sign_up_new_user.jsp?error=true");
 	%>
-			<p>Erro ao alterar senha de usuario, tente novamente mais tarde.</p>
+			<p>Erro ao cadastrar usuario, tente novamente mais tarde.</p>
 	<%
 		}
 	%>

@@ -20,14 +20,15 @@
 
           	EmailAccount contaE = new EmailAccount(email, password, server_address, server_protocol, server_port, name_user);
           	
-          	EmailAccounts.alterar(contaE);
+          	EmailAccounts.incluir(contaE);
+          	
           	response.sendRedirect("hub.jsp");
           }
           catch(Exception erro){
                erro.printStackTrace();
                
      %>
-          <p>Erro ao alterar conta, tente novamente mais tarde.</p>
+          <p>Erro ao cadastrar usuario, tente novamente mais tarde.</p>
      <%
           }
      %>

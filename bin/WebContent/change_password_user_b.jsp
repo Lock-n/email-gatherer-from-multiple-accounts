@@ -16,7 +16,6 @@
 			User usuario= new User(nome, senha);
 			
 			Users.alterar(usuario);
-			response.sendRedirect("hub.jsp");
 		}
 		catch(Exception erro){
 			erro.printStackTrace();

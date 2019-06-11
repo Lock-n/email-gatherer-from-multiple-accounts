@@ -12,7 +12,7 @@
 	<%
 	try
 	{
-		MeuResultSet resultado = EmailAccounts.getContasEmails();
+		MeuResultSet resultado = EmailAccounts.getLivros();
 		
 			
 		while(resultado.next())
@@ -25,7 +25,6 @@
 	
 	<%
 		}
-		//response.sendRedirect("hub.jsp");
 	}
 	catch(Exception erro)
 	{

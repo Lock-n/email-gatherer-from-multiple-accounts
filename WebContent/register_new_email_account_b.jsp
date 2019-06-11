@@ -28,7 +28,7 @@
                erro.printStackTrace();
                
      %>
-          <p>Erro ao cadastrar usuario, tente novamente mais tarde.</p>
+          <p>Erro ao cadastrar conta, tente novamente mais tarde.</p>
      <%
           }
      %>
