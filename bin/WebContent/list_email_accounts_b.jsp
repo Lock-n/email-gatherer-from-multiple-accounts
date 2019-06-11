@@ -12,7 +12,7 @@
 	<%
 	try
 	{
-		MeuResultSet resultado = EmailAccounts.getLivros();
+		MeuResultSet resultado = EmailAccounts.getContasEmails();
 		
 			
 		while(resultado.next())

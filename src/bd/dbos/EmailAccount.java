@@ -2,11 +2,14 @@ package bd.dbos;
 
 public class EmailAccount implements Cloneable
 {
+	
     private String email;
     private String password;
     private String server_address;  // endereco do servidor de env
-    private String server_protocol;		// protocolo de envio 
-    private int    server_port;		// porta de envio
+    private String server_send_protocol;	// protocolo de envio 
+    private String server_receive_protocol;	// protocolo de recebimento
+    private int    server_send_port;		// porta de envio
+    private int    server_receive_port;		// porta de recebimento
     private String name_user;        //nome do dono da conta
     
     
@@ -32,18 +35,32 @@ public class EmailAccount implements Cloneable
 		this.server_address = server_address;
 	}
 
-	public void setServer_protocol(String server_protocol)throws Exception
+	public void setServer_send_protocol(String server_protocol)throws Exception
 	{
 		if (server_protocol==null || server_protocol.equals(""))
             throw new Exception ("protocolo de envio não fornecido");
-		this.server_protocol = server_protocol;
+		this.server_send_protocol = server_protocol;
 	}
 
-	public void setServer_port(int server_port)throws Exception
+	public void setServer_receive_protocol(String server_protocol)throws Exception
+	{
+		if (server_protocol==null || server_protocol.equals(""))
+            throw new Exception ("protocolo de envio não fornecido");
+		this.server_receive_protocol = server_protocol;
+	}
+
+	public void setServer_send_port(int server_port)throws Exception
 	{
 		if (server_port <= 0)
             throw new Exception ("Porta de envio invalida");
-		this.server_port = server_port;
+		this.server_send_port = server_port;
+	}
+
+	public void setServer_receive_port(int server_port)throws Exception
+	{
+		if (server_port <= 0)
+            throw new Exception ("Porta de envio invalida");
+		this.server_receive_port = server_port;
 	}
     
     public void setNameUser(String name_user)throws Exception
@@ -65,25 +82,37 @@ public class EmailAccount implements Cloneable
 		return this.server_address;
 	}
 
-	public String getServer_protocol() {
-		return this.server_protocol;
+	public String getServer_send_protocol() {
+		return this.server_send_protocol;
 	}
 
-	public int getServer_port() {
-		return this.server_port;
+	public String getServer_receive_protocol() {
+		return this.server_receive_protocol;
+	}
+
+	public int getServer_send_port() {
+		return this.server_send_port;
+	}
+
+	public int getServer_receive_port() {
+		return this.server_receive_port;
 	}
     
     public String getNameUser() {
 		return this.name_user;
 	}
 
-    public EmailAccount(String email, String password, String server_address, String server_protocol, int server_port, String name_user)
+
+    
+    public EmailAccount(String email, String password, String server_address, String server_send_protocol, String server_receive_protocol, int server_send_port, int server_receive_port, String name_user)
     {
 		this.email                = email;
 		this.password             = password;
 		this.server_address       = server_address;
-		this.server_protocol      = server_protocol;
-		this.server_port          = server_port;
+		this.server_send_protocol      = server_send_protocol;
+		this.server_receive_protocol      = server_receive_protocol;
+		this.server_send_port          = server_send_port;
+		this.server_receive_port          = server_receive_port;
         this.name_user            = name_user;
 	}
 
@@ -93,8 +122,10 @@ public class EmailAccount implements Cloneable
 				ret += "email=" + email;
 				ret += "\n password=" + password;
 				ret+=  "\n server_address=" + server_address;
-				ret+=  "\n server_protocol=" + server_protocol;
-				ret+=  "\n server_port=" + server_port;
+				ret+=  "\n server_send_protocol=" + server_send_protocol;
+				ret+=  "\n server_receive_protocol=" + server_receive_protocol;
+				ret+=  "\n server_send_port=" + server_send_port;
+				ret+=  "\n server_receive_port=" + server_receive_port;
                 ret+=  "\n name_user=" + name_user;
 		
 		return ret;
@@ -107,8 +138,10 @@ public class EmailAccount implements Cloneable
 		ret = 7 * ret + email.hashCode();
 		ret = 7 * ret + password.hashCode();
 		ret = 7 * ret + server_address.hashCode();
-		ret = 7 * ret + server_protocol.hashCode();
-		ret = 7 * ret + new Integer(server_port).hashCode();
+		ret = 7 * ret + server_send_protocol.hashCode();
+		ret = 7 * ret + server_receive_protocol.hashCode();
+		ret = 7 * ret + new Integer(server_send_port).hashCode();
+		ret = 7 * ret + new Integer(server_receive_port).hashCode();
         ret = 7 * ret + name_user.hashCode();
 		
 		return ret;
@@ -134,10 +167,16 @@ public class EmailAccount implements Cloneable
 		if (this.server_address != conEmail.server_address)
 			return false;
 		
-		if (!this.server_protocol.equals(conEmail.server_protocol))
+		if (!this.server_send_protocol.equals(conEmail.server_send_protocol))
 		return false;
 		
-		if (this.server_port != conEmail.server_port)
+		if (!this.server_receive_protocol.equals(conEmail.server_receive_protocol))
+		return false;
+		
+		if (this.server_send_port != conEmail.server_send_port)
+			return false;
+		
+		if (this.server_receive_port != conEmail.server_receive_port)
 			return false;
             
         if (!this.name_user.equals(conEmail.name_user))
@@ -153,8 +192,10 @@ public class EmailAccount implements Cloneable
     	this.email      = modelo.email;      	// nao clono, pq nao eh clonavel
     	this.password      = modelo.password;			// nao clono, pq nao eh clonavel
     	this.server_address = modelo.server_address;	// nao clono, pq nao eh clonavel
-    	this.server_protocol    = modelo.server_protocol; 		// nao clono, pq nao eh clonavel
-    	this.server_port    = modelo.server_port;		// nao clono, pq nao eh objeto
+    	this.server_send_protocol    = modelo.server_send_protocol; 		// nao clono, pq nao eh clonavel
+    	this.server_receive_protocol    = modelo.server_receive_protocol; 		// nao clono, pq nao eh clonavel
+    	this.server_send_port    = modelo.server_send_port;		// nao clono, pq nao eh objeto
+    	this.server_receive_port    = modelo.server_receive_port;		// nao clono, pq nao eh objeto
         this.name_user    = modelo.name_user;
     }
 

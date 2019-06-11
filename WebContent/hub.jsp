@@ -100,8 +100,8 @@ function EncerrarSessao(){
     <br/>
     <button onclick="AlterarSenha()">Alterar senha de usuario</button>
     <br/>
-    <button onclick="EncerrarSessao()">Encerrar sessão</button>
-    <
+    <button onclick="EncerrarSessao()">Encerrar sessï¿½o</button>
+    
 
  </form> 
 	
