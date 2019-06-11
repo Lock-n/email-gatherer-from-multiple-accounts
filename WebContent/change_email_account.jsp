@@ -4,31 +4,31 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Registrar Conta de Email</title>
+<title>Alterar Conta de Email</title>
 </head>
 <body>
 
 
-	<form method="get" action="register_new_email_account_b.jsp">
+	<form method="get" action="change_email_account_b.jsp">
 
-		<label>Email:</label> 
+		<label>Email da conta que sera alterada:</label> 
 		<input type="text" id="email" name="email">
 		<br/>
-		<label>Senha:</label> 
+		<label>Nova senha:</label> 
 		<input type="password" id="senha" name="senha">
 		<br/>
-		<label>Endereço do servidor de envio:</label> 
+		<label>Novo endereço do servidor de envio:</label> 
 		<input type="text" id="server_address" name="server_address">
 		<br/>
-		<label>Protocolo de envio:</label> 
+		<label>Novo protocolo de envio:</label> 
 		<input type="text" id="server_protocol" name="server_protocol">
 		<br/>
-		<label>Porta de envio:</label> 
+		<label>Nova porta de envio:</label> 
 		<input type="text" id="server_port" name="server_port">
 		<br/>
 		
 		<br>
-		<button>Cadastrar</button>
+		<button>Alterar</button>
 		
 	</form>
 

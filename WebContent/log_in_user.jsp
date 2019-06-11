@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Login</title>
 </head>
 <body>
 
@@ -18,7 +18,6 @@ function correto()
 		return;
 	}
 
-		
 }
 
 </script>

@@ -20,13 +20,13 @@
 
           	EmailAccount contaE = new EmailAccount(email, password, server_address, server_protocol, server_port, name_user);
           	
-          	EmailAccounts.incluir(contaE);
+          	EmailAccounts.alterar(contaE);
           }
           catch(Exception erro){
                erro.printStackTrace();
                
      %>
-          <p>Erro ao cadastrar usuario, tente novamente mais tarde.</p>
+          <p>Erro ao alterar conta, tente novamente mais tarde.</p>
      <%
           }
      %>
