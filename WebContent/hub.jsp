@@ -33,7 +33,7 @@
 	
 	if(verConta!=null)
 		if(verConta.equals("true"))
-			response.sendRedirect("list_email_accounts.jsp");
+			response.sendRedirect("list_email_accounts_b.jsp");
 	
 	if(altSenha!=null)
 		if(altSenha.equals("true"))
@@ -41,8 +41,11 @@
 	
 	if(encSessao!=null)
 		if(encSessao.equals("true"))
-			response.sendRedirect("list_email_accounts.jsp");
-
+		{
+			session.invalidate();
+			response.sendRedirect("log_in_user.jsp");
+	
+		}
 %>
 
 function AdicionarConta(){

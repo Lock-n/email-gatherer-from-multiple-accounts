@@ -12,7 +12,8 @@
 	<%
 	try
 	{
-		MeuResultSet resultado = EmailAccounts.getContasEmails();
+		String name = (String)session.getAttribute("name");
+		MeuResultSet resultado = EmailAccounts.getContasUser(name);
 		
 			
 		while(resultado.next())
