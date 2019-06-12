@@ -13,7 +13,7 @@
 	try
 	{
 		String name = (String)session.getAttribute("name");
-		MeuResultSet resultado = EmailAccounts.getContasUser(name);
+		MeuResultSet resultado = EmailAccounts.getEmailAccountsByUser(name);
 		
 			
 		while(resultado.next())
