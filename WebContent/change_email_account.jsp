@@ -17,8 +17,20 @@
 		<label>Nova senha:</label> 
 		<input type="password" id="password" name="password">
 		<br/>
+		<label>Novo Endereço do servidor de envio:</label> 
+		<input type="text" id="server_address" name="server_send_address">
+		<br/>
+		<label>Novo Endereço do servidor de recepcao:</label> 
+		<input type="text" id="server_address" name="server_receive_address">
+		<br/>
 		<label>Novo protocolo de envio:</label> 
-		<input type="text" id="server_protocol" name="server_protocol">
+		<input type="text" id="server_protocol" name="server_send_protocol">
+		<br/>
+		<label>Novo protocolo de envio:</label> 
+		<input type="text" id="server_protocol" name="server_send_protocol">
+		<br/>
+		<label>Nova porta de envio:</label> 
+		<input type="text" id="server_port" name="server_port">
 		<br/>
 		<label>Nova porta de envio:</label> 
 		<input type="text" id="server_port" name="server_port">

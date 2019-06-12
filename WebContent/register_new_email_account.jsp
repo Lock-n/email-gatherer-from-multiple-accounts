@@ -18,14 +18,23 @@
 		<input type="password" id="password" name="password">
 		<br/>
 		<label>Endereço do servidor de envio:</label> 
-		<input type="text" id="server_address" name="server_address">
+		<input type="text" id="server_address" name="server_send_address">
+		<br/>
+		<label>Endereço do servidor de recepcao:</label> 
+		<input type="text" id="server_address" name="server_receive_address">
 		<br/>
 		<label>Protocolo de envio:</label> 
-		<input type="text" id="server_protocol" name="server_protocol">
+		<input type="text" id="server_protocol" name="server_send_protocol">
+		<br/>
+		<label>Protocolo de recepcao:</label> 
+		<input type="text" id="server_protocol" name="server_receive_protocol">
 		<br/>
 		<label>Porta de envio:</label> 
-		<input type="text" id="server_port" name="server_port">
+		<input type="text" id="server_port" name="server_send_port">
 		<br/>
+		<label>Porta de recepcao:</label> 
+		<input type="text" id="server_port" name="server_receive_port">
+		
 		
 		<br>
 		<button>Cadastrar</button>
