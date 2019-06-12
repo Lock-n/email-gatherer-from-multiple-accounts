@@ -11,16 +11,17 @@
 	<%
           try{
 
-       	 	String email            = request.getParameter("email");
-          	String password         = request.getParameter("password");
-          	String server_address   = request.getParameter("server_address"); 				// endereco do servidor de env
-          	String server_send_protocol  = request.getParameter("server_send_protocol");	// protocolo de envio 
-          	String server_receive_protocol  = request.getParameter("server_receive_protocol");	// protocolo de recebimento 
-          	int    server_send_port      = Integer.parseInt(request.getParameter("server_send_port"));	// porta de envio 
-          	int    server_receive_port      = Integer.parseInt(request.getParameter("server_receive_port"));	// porta de recebimento
-     		String name_user        = (String)session.getAttribute("name");// talvez tenha que ter request.getSession
+         	 	String email            = request.getParameter("email");
+              	String password         = request.getParameter("password");
+              	String server_send_address   = request.getParameter("server_send_address"); 				// endereco do servidor de env
+              	String server_receive_address   = request.getParameter("server_receive_address"); 				// endereco do servidor de recepcao
+              	String server_send_protocol  = request.getParameter("server_send_protocol");	// protocolo de envio 
+              	String server_receive_protocol  = request.getParameter("server_receive_protocol");	// protocolo de recebimento 
+              	int    server_send_port      = Integer.parseInt(request.getParameter("server_send_port"));	// porta de envio 
+              	int    server_receive_port      = Integer.parseInt(request.getParameter("server_receive_port"));	// porta de recebimento
+         		String name_user        = (String)session.getAttribute("name");// talvez tenha que ter request.getSession
 
-          	EmailAccount contaE = new EmailAccount(email, password, server_address, server_send_protocol, server_receive_protocol, server_send_port, server_receive_port, name_user);
+              	EmailAccount contaE = new EmailAccount(email, password, server_send_address, server_receive_address, server_send_protocol, server_receive_protocol, server_send_port, server_receive_port, name_user);
           	
           	EmailAccounts.alterar(contaE);
           	response.sendRedirect("hub.jsp");
