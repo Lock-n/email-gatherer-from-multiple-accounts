@@ -15,13 +15,13 @@
 		String name = (String)session.getAttribute("name");
 		MeuResultSet resultado = EmailAccounts.getEmailAccountsByUser(name);
 		
-		%><form action="hub.jsp" method="post"> <% 
+		%><form action="view_emails.jsp" method="post"> <% 
 		
 		do{
 	%>			
 			<tr>
 				<th>
-				<input type="checkbox" name="contas" value=<%=resultado.getString("email") %>>
+				<input type="checkbox" name="contas" value="<%=resultado.getString("email") %>">
 				<%=resultado.getString("email") %>
 				</th>			    
 			</tr>	

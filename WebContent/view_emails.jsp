@@ -13,12 +13,12 @@ java.io.FileInputStream, email.EmailHelper, java.util.Queue, java.util.LinkedLis
 
 	<p> Por favor aguarde...</p>
 	<%
-		try{
 			
 			String[] loginContas = request.getParameterValues("contas");
 		
 			for(String login : loginContas)
 			{
+				
 				EmailAccount contaE = EmailAccounts.getEmailAccountByEmail(login);
 				
 				String email = contaE.getEmail();//"joao.ferreira5569@gmail.com";
@@ -100,14 +100,8 @@ java.io.FileInputStream, email.EmailHelper, java.util.Queue, java.util.LinkedLis
 				   	<%
 				   	e.printStackTrace();
 				  }
-				
 			}
-
-
-		}
-		catch(Exception erro){
-			erro.printStackTrace();
-		}
+	
 	%>
 			
 	<form method="post" action="hub.jsp"> 

@@ -187,7 +187,59 @@ public class EmailAccounts
             throw new Exception ("Erro ao procurar conta de email");
         }
     }
+
+    
+    public static EmailAccount getEmailAccountByEmail (String email) throws Exception
+    {
+        EmailAccount contaE = null;
+
+        try
+        {
+            String sql;
+
+            sql = "SELECT * " +
+                  "FROM TDI_project_Email_Account " +
+                  "WHERE email = ?";
+            
+            BDSQLServer.COMANDO.prepareStatement (sql);
+
+            BDSQLServer.COMANDO.setString (1, email);
+
+            MeuResultSet resultado = (MeuResultSet)BDSQLServer.COMANDO.executeQuery ();
+
+           if (!resultado.first())
+                throw new Exception ("conta nao cadastrado");
+
+            
+           contaE = new EmailAccount(email, resultado.getString("password"), resultado.getString("server_send_address"), 
+        		   resultado.getString("server_receive_address"), resultado.getString("server_send_protocol"),
+        		   resultado.getString("server_receive_protocol"), resultado.getInt("server_send_port"),
+        		   resultado.getInt("server_receive_port"), resultado.getString("name_user"));
+           /*
+           contaE.setEmail(resultado.getString("email"));
+            contaE.setPassword(resultado.getString("password"));
+            
+            contaE.setServer_send_address(resultado.getString("server_send_address"));
+            contaE.setServer_receive_address(resultado.getString("server_receive_address"));
+            
+            contaE.setServer_send_protocol(resultado.getString("server_send_protocol"));
+            contaE.setServer_receive_protocol(resultado.getString("server_receive_protocol"));
+            
+            contaE.setServer_send_port(resultado.getInt("server_send_port"));
+            contaE.setServer_receive_port(resultado.getInt("server_receive_port"));
+            
+            contaE.setNameUser(resultado.getString("name_user"));*/
+            
+            
+            
+        }
+        catch (SQLException erro)
+        {
+            throw new Exception ("Erro ao procurar conta de email");
+        }
         
-
-
+        return contaE;
+    }
+    
+    
 }
