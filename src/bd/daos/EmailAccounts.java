@@ -48,18 +48,20 @@ public class EmailAccounts
             String sql;
 
             sql = "INSERT INTO TDI_project_Email_Account " +
-                  "(email, password, server_address, server_protocol, server_port, name_user) " +
+                  "(email, password, server_address, server_send_protocol, server_receive_protocol, server_send_port, server_receive_port, name_user) " +
                   "VALUES " +
                   "(?,?,?,?,?,?)";
 
             BDSQLServer.COMANDO.prepareStatement (sql);
 
-            BDSQLServer.COMANDO.setString (1, contaE.getEmail           ());
-            BDSQLServer.COMANDO.setString (2, contaE.getPassword        ());
-            BDSQLServer.COMANDO.setString (3, contaE.getServer_address  ());
-            BDSQLServer.COMANDO.setString (4, contaE.getServer_protocol ());
-            BDSQLServer.COMANDO.setInt    (5, contaE.getServer_port     ());
-            BDSQLServer.COMANDO.setString (6, contaE.getNameUser       ());    
+            BDSQLServer.COMANDO.setString (1, contaE.getEmail                   ());
+            BDSQLServer.COMANDO.setString (2, contaE.getPassword                ());
+            BDSQLServer.COMANDO.setString (3, contaE.getServer_address          ());
+            BDSQLServer.COMANDO.setString (4, contaE.getServer_send_protocol    ());
+            BDSQLServer.COMANDO.setString (4, contaE.getServer_receive_protocol ());
+            BDSQLServer.COMANDO.setInt    (5, contaE.getServer_send_protocol    ());
+            BDSQLServer.COMANDO.setInt    (5, contaE.getServer_receive_port     ());
+            BDSQLServer.COMANDO.setString (6, contaE.getNameUser                ());    
             
 
             BDSQLServer.COMANDO.executeUpdate ();
@@ -108,7 +110,7 @@ public class EmailAccounts
             String sql;
 
             sql = "UPDATE TDI_project_Email_Account " +
-                  "SET password=?, server_protocol=?, server_port=? "+
+                  "SET password=?, server_send_protocol=?, server_receive_protocol=?, server_send_port=?, server_receive_port=? "+
                   "WHERE email = ?";
 
             BDSQLServer.COMANDO.prepareStatement (sql);
@@ -142,6 +144,8 @@ public class EmailAccounts
             sql = "SELECT * " +
                   "FROM TDI_project_Email_Account " +
                   "WHERE name_user = ?";
+
+            //name_user não existe nessa tabela, tem que pegar da outra tabela, TDI_project_User
 
             BDSQLServer.COMANDO.prepareStatement (sql);
 
@@ -195,6 +199,9 @@ public class EmailAccounts
 
             sql = "SELECT * " +
                   "FROM TDI_project_Email_Account WHERE name_user = ?";
+
+            //name_user não existe nessa tabela, tem que pegar da outra tabela, TDI_project_User
+
             BDSQLServer.COMANDO.prepareStatement (sql);
             
             BDSQLServer.COMANDO.setString (1,name);
