@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Remover Conta Email</title>
+  <title>Alterar Senha Usuario</title>
   <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
@@ -27,23 +27,23 @@
       <div class="tab-content">
         
         <div >   
-          <h1>Informe o Email que deseja remover</h1>
+          <h1>Digite sua nova senha</h1>
           
-          <form action="remove_a_email_account_b.jsp" method="post">
+          <form action="change_password_user_b.jsp" method="post">
           
            
 
           <div class="field-wrap">
             <label>
-              Email que sera removido<span class="req">*</span>
+              Nova Senha<span class="req">*</span>
             </label>
-            <input type="email" id="email" name="email" required autocomplete="off"/>
+            <input type="password" id="nova_senha" name="nova_senha" required autocomplete="off"/>
           </div>
           
        
           
          
-          <button type="submit" class="button button-block"/>Remover</button>
+          <button type="submit" class="button button-block"/>Alterar</button>
           
           </form>
 

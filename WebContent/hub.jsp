@@ -43,7 +43,7 @@
 		if(encSessao.equals("true"))
 		{
 			session.invalidate();
-			response.sendRedirect("log_in_user.jsp");
+			response.sendRedirect("index.jsp");
 	
 		}
 %>
