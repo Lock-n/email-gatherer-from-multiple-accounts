@@ -23,7 +23,7 @@
 				<%
 				//HttpSession session = request.getSession(true);///////nao sei se tem que iniciar///////	
 				session.setAttribute("name", nome);
-				response.sendRedirect("register_new_email_account.jsp");//("hub.jsp");
+				response.sendRedirect("hub.jsp");
 			}
 			else
 			{

@@ -31,9 +31,9 @@ public class EmailAccount implements Cloneable
 
 	public void setServer_send_address(String server_send_address)throws Exception
 	{
-		if (server_address==null || server_address.equals(""))
+		if (server_send_address==null || server_send_address.equals(""))
             throw new Exception ("Endereco do servidor de envio não fornecido");
-		this.server_address = server_address;
+		this.server_send_address = server_send_address;
 	}
 
 	public void setServer_receive_address(String server_receive_address)throws Exception
@@ -120,7 +120,8 @@ public class EmailAccount implements Cloneable
     {
 		this.email                = email;
 		this.password             = password;
-		this.server_address       = server_address;
+		this.server_send_address       = server_send_address;
+		this.server_receive_address       = server_receive_address;
 		this.server_send_protocol      = server_send_protocol;
 		this.server_receive_protocol      = server_receive_protocol;
 		this.server_send_port          = server_send_port;

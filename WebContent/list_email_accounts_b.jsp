@@ -16,8 +16,8 @@
 		MeuResultSet resultado = EmailAccounts.getEmailAccountsByUser(name);
 		
 			
-		while(resultado.next())
-		{
+		
+		do{
 	%>
 		<tr>			
 			<th>Email: <%=resultado.getString("email") %></th>			    
@@ -26,6 +26,8 @@
 	
 	<%
 		}
+		while(resultado.next());
+		
 		//response.sendRedirect("hub.jsp");
 	}
 	catch(Exception erro)
