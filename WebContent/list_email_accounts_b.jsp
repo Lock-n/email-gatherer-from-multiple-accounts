@@ -11,22 +11,33 @@
 	<table>
 	<%
 	try
-	{
+	{		//request.getParameterValues(name)
 		String name = (String)session.getAttribute("name");
 		MeuResultSet resultado = EmailAccounts.getEmailAccountsByUser(name);
 		
-			
+		%><form action="hub.jsp" method="post"> <% 
 		
 		do{
 	%>
-		<tr>			
-			<th>Email: <%=resultado.getString("email") %></th>			    
-		</tr>
-	
+
+							
+			<tr>
+				<th>
+				<input type="checkbox" name="conta" value=<%=resultado.getString("email") %>>
+				<%=resultado.getString("email") %>
+				</th>			    
+			</tr>	
+			
 	
 	<%
-		}
-		while(resultado.next());
+		}while(resultado.next());
+		
+		%> 
+		<
+		
+		</form>
+		
+		<%
 		
 		//response.sendRedirect("hub.jsp");
 	}
