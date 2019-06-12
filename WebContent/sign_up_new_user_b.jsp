@@ -17,7 +17,8 @@
 			
 			Users.incluir(usuario);
 			
-			response.sendRedirect("log_in_user.jsp");
+			session.setAttribute("name", nome);
+			response.sendRedirect("hub.jsp");
 		}
 		catch(Exception erro){
 			erro.printStackTrace();

@@ -48,20 +48,21 @@ public class EmailAccounts
             String sql;
 
             sql = "INSERT INTO TDI_project_Email_Account " +
-                  "(email, password, server_address, server_send_protocol, server_receive_protocol, server_send_port, server_receive_port, name_user) " +
+                  "(email, password, server_send_address, server_receive_address, server_send_protocol, server_receive_protocol, server_send_port, server_receive_port, name_user) " +
                   "VALUES " +
-                  "(?,?,?,?,?,?,?,?)";
+                  "(?,?,?,?,?,?,?,?,?)";
 
             BDSQLServer.COMANDO.prepareStatement (sql);
 
             BDSQLServer.COMANDO.setString (1, contaE.getEmail                   ());
             BDSQLServer.COMANDO.setString (2, contaE.getPassword                ());
-            BDSQLServer.COMANDO.setString (3, contaE.getServer_address          ());
-            BDSQLServer.COMANDO.setString (4, contaE.getServer_send_protocol    ());
-            BDSQLServer.COMANDO.setString (5, contaE.getServer_receive_protocol ());
-            BDSQLServer.COMANDO.setInt    (6, contaE.getServer_send_port    ());
-            BDSQLServer.COMANDO.setInt    (7, contaE.getServer_receive_port     ());
-            BDSQLServer.COMANDO.setString (8, contaE.getNameUser                ());    
+            BDSQLServer.COMANDO.setString (3, contaE.getServer_send_address     ());
+            BDSQLServer.COMANDO.setString (4, contaE.getServer_receive_address  ());
+            BDSQLServer.COMANDO.setString (5, contaE.getServer_send_protocol    ());
+            BDSQLServer.COMANDO.setString (6, contaE.getServer_receive_protocol ());
+            BDSQLServer.COMANDO.setInt    (7, contaE.getServer_send_port        ());
+            BDSQLServer.COMANDO.setInt    (8, contaE.getServer_receive_port     ());
+            BDSQLServer.COMANDO.setString (9, contaE.getNameUser                ());    
             
 
             BDSQLServer.COMANDO.executeUpdate ();
@@ -110,23 +111,19 @@ public class EmailAccounts
             String sql;
 
             sql = "UPDATE TDI_project_Email_Account " +
-                  "SET password=?, server_send_protocol=?, server_receive_protocol=?, server_send_port=?, server_receive_port=? "+
+                  "SET password=?, server_send_address=?, server_receive_address=?, server_send_protocol=?, server_receive_protocol=?, server_send_port=?, server_receive_port=? "+
                   "WHERE email = ?";
 
             BDSQLServer.COMANDO.prepareStatement (sql);       
             
             BDSQLServer.COMANDO.setString (1, contaE.getPassword                ());
-            BDSQLServer.COMANDO.setString (2, contaE.getServer_send_protocol    ());
-            BDSQLServer.COMANDO.setString (3, contaE.getServer_receive_protocol ());
-            BDSQLServer.COMANDO.setInt    (4, contaE.getServer_send_port    ());
-            BDSQLServer.COMANDO.setInt    (5, contaE.getServer_receive_port     ());
-            BDSQLServer.COMANDO.setString (6, contaE.getEmail                   ());
-            
-            
-            
-            BDSQLServer.COMANDO.setString (4, contaE.getEmail           ());
-
-            
+            BDSQLServer.COMANDO.setString (2, contaE.getServer_send_address     ());
+            BDSQLServer.COMANDO.setString (3, contaE.getServer_receive_address  ());            
+            BDSQLServer.COMANDO.setString (4, contaE.getServer_send_protocol    ());
+            BDSQLServer.COMANDO.setString (5, contaE.getServer_receive_protocol ());
+            BDSQLServer.COMANDO.setInt    (6, contaE.getServer_send_port        ());
+            BDSQLServer.COMANDO.setInt    (7, contaE.getServer_receive_port     ());
+            BDSQLServer.COMANDO.setString (8, contaE.getEmail                   ());
 
             BDSQLServer.COMANDO.executeUpdate ();
             BDSQLServer.COMANDO.commit        ();

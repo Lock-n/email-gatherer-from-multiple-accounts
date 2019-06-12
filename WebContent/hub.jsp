@@ -43,7 +43,7 @@
 		if(encSessao.equals("true"))
 		{
 			session.invalidate();
-			response.sendRedirect("log_in_user.jsp");
+			response.sendRedirect("index.jsp");
 	
 		}
 %>
@@ -100,7 +100,7 @@ function EncerrarSessao(){
     <br/>
     <button onclick="AlterarSenha()">Alterar senha de usuario</button>
     <br/>
-    <button onclick="EncerrarSessao()">Encerrar sess�o</button>
+    <button onclick="EncerrarSessao()">Encerrar sessao</button>
     
 
  </form> 
