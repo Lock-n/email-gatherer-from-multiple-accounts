@@ -16,7 +16,7 @@
 
 </script>
 
-<form action="enviarEmail" method="post" enctype="multipart/form-data">
+<form action="send_email_b.jsp" method="post" enctype="multipart/form-data">
 	Assunto:
 	<input type="text" name="assunto" id="assunto" placeholder="Assunto">
 	</br>
