@@ -100,7 +100,7 @@
             <label>
               Anexo
             </label>
-            <input ype="file" name="anexo" id="anexo"/>
+            <input type="file" name="anexo" multiple = "multiple" id="anexo" size="50">
           </div>
           
          

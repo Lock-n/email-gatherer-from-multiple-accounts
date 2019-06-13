@@ -13,8 +13,10 @@ if(texto != null && !texto.equals(""))
 {
 
     String assunto = request.getParameter("assunto"); 
-
-   
+    
+    String filesname = request.getParameter("anexo");
+    
+    String[] vetFiles = filesname.split(",");
   	
    
    	final String name_email = (String)request.getParameter("name_email");//"joao.ferreira5569@gmail.com";
@@ -88,9 +90,24 @@ if(texto != null && !texto.equals(""))
        
        multipart.addBodyPart(messageBodyPart); 
        
+       if (filesname != null && filesname.trim() != "") {
+           for (int i = 0; i < vetFiles.length; i++) 
+           {
+               MimeBodyPart attachPart = new MimeBodyPart();
+
+               try 
+               {
+                   attachPart.attachFile(new File(vetFiles[i]));
+               } catch (IOException ex) 
+               {
+                   ex.printStackTrace();
+               }
+
+                multipart.addBodyPart(attachPart);
+           }
+       
+       
        message.setContent(multipart); 
-       
-       
        
        Transport transport = mailSession.getTransport("smtp");
        
@@ -102,7 +119,7 @@ if(texto != null && !texto.equals(""))
        String title = "Enviar email"; 
        result = "Mensagem enviada com sucesso!"; 
        
-    }
+       }}
     catch (MessagingException mex) { 
        mex.printStackTrace(); 
        result = "Erro no envio da mensagem. Tente novamente!"; 
