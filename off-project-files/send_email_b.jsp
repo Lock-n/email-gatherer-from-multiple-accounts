@@ -1,41 +1,38 @@
-<%@page import="bd.dbos.EmailAccount"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="java.io.*,java.util.*,javax.mail.*"%>
+<%@ page import="java.io.*,java.util.*, java.lang.*, javax.mail.*"%>
 <%@ page import="javax.mail.internet.*,javax.activation.*"%> 
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %> 
+<%@ page import="email.SendEmail.*,javax.servlet.*" %> 
 
 <%
 
-String result ="Nao entrou"; 
+String result ="Nao entrou";
 String texto = request.getParameter("texto"); 
 if(texto != null && !texto.equals(""))
 {
 
-    String assunto = request.getParameter("assunto"); 
-    
-    String filesname = request.getParameter("anexo");
-    
-    String[] vetFiles = filesname.split(",");
-  	
-   
-   	final String name_email = (String)request.getParameter("name_email");//"joao.ferreira5569@gmail.com";
-   	
-   	ArrayList<EmailAccount> contasE = (ArrayList<EmailAccount>)session.getAttribute("contasE");
-   	EmailAccount contaE;
-   	
-   	for(int i=0;;i++)
-	{
-		if(name_email.equals(contasE.get(i).getEmail()))
-		{
-			contaE = contasE.get(i);
-			break;
-		}
-	}  	
+	
+	String subject = request.getParameter("assunto"); 
 
-   	final String senha = contaE.getPassword();//"pass1234#";
-   	String host = contaE.getServer_send_protocol();//"smtp.gmail.com"; 
-   	
+    String assunto = request.getParameter("assunto"); 
+
+   String host = "smtp.gmail.com"; 
+   
+   String filesname = request.getParameter("anexo");
+   
+   String[] vetFiles = filesname.split(",");
+
+	String printanome = filesname;
+  	
+	//out.println(printanome + "\n");
+   
+   final String name_email_user = "joao.ferreira5569@gmail.com";
+   final String senha = "pass1234#";
+
+
+   List<File> uploadedFiles;	
+   
    	Properties properties = System.getProperties(); 
    	properties.put("mail.smtp.host", host); 
    	properties.put("mail.smtp.auth", "true");
@@ -44,12 +41,14 @@ if(texto != null && !texto.equals(""))
    	Session mailSession = Session.getInstance(properties,
             new javax.mail.Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(name_email, senha);
+                    return new PasswordAuthentication(name_email_user, senha);
                 }
    		});
    	
 	try{ 
-		   
+		 
+	   //uploadedFiles = saveUploadedFiles(request);
+		
        MimeMessage message = new MimeMessage(mailSession);
        
        
@@ -77,7 +76,7 @@ if(texto != null && !texto.equals(""))
        }
       
        
-       message.setFrom(new InternetAddress(name_email)); 
+       message.setFrom(new InternetAddress(name_email_user)); 
        
        message.setSubject(assunto);
        
@@ -106,12 +105,14 @@ if(texto != null && !texto.equals(""))
                 multipart.addBodyPart(attachPart);
            }
        
-       
        message.setContent(multipart); 
+       
+       
+       Transport.send(message); 
        
        Transport transport = mailSession.getTransport("smtp");
        
-       transport.connect("smtp.gmail.com", name_email, senha);
+       transport.connect("smtp.gmail.com", name_email_user, senha);
        transport.sendMessage(message, message.getAllRecipients());
        transport.close();
        
@@ -120,11 +121,15 @@ if(texto != null && !texto.equals(""))
        result = "Mensagem enviada com sucesso!"; 
        
        }}
+       
+    
     catch (MessagingException mex) { 
        mex.printStackTrace(); 
        result = "Erro no envio da mensagem. Tente novamente!"; 
    }
 }
+	
+	
  %> 
 <html> 
 <head> 
@@ -133,7 +138,9 @@ if(texto != null && !texto.equals(""))
 <body> 
 <center> <h1>Enviando arquivo usando JSP...</h1> </center> 
 <p align="center"> 
-<% out.println("Resultado: " + result + "\n");%> 
+<% out.println("Resultado: " + result + "\n");
+	out.println("Resultado: " + texto + "\n");
+%> 
 </p>
 </body>
 </html>
