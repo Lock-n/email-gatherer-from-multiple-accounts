@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>HUB</title>
 </head>
 <body>
@@ -18,6 +18,7 @@
 	String verConta = request.getParameter("verConta");
 	String altSenha = request.getParameter("altSenha");
 	String encSessao = request.getParameter("encSessao");
+	String irPaginaPrincipal = request.getParameter("irPaginaPrincipal");
 
 	if(addConta!=null)
 		if(addConta.equals("true"))
@@ -39,12 +40,15 @@
 		if(altSenha.equals("true"))
 			response.sendRedirect("change_password_user.jsp");
 	
+	if (irPaginaPrincipal != null)
+		if (irPaginaPrincipal.equals("true"))
+			response.sendRedirect("main.jsp");
+	
 	if(encSessao!=null)
 		if(encSessao.equals("true"))
 		{
 			session.invalidate();
 			response.sendRedirect("index.jsp");
-	
 		}
 %>
 
@@ -78,6 +82,10 @@ function EncerrarSessao(){
 	document.getElementById("form").submit();
 }
 
+function IrPaginaPrincipal() {
+	document.getElementById("irPaginaPrincipal").value = "true";
+	document.getElementById("form").submit();
+}
 </script>
 	
 	
@@ -89,6 +97,7 @@ function EncerrarSessao(){
 	<input type="hidden" id="verConta" name="verConta">
 	<input type="hidden" id="altSenha" name="altSenha">
 	<input type="hidden" id="encSessao" name="encSessao">
+	<input type="hidden" id="irPaginaPrincipal" name="irPaginaPrincipal">
     
     <button onclick="AdicionarConta()">Adicionar Conta de Email</button>
     <br/>
@@ -101,8 +110,8 @@ function EncerrarSessao(){
     <button onclick="AlterarSenha()">Alterar senha de usuario</button>
     <br/>
     <button onclick="EncerrarSessao()">Encerrar sessao</button>
-    
-
+    <br/>
+	<button onclick="IrPaginaPrincipal()">Página Principal</button>
  </form> 
 	
 

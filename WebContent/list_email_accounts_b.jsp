@@ -21,7 +21,7 @@
 	%>			
 			<tr>
 				<th>
-				<input type="checkbox" name="contas" value="<%=resultado.getString("email") %>">
+				<input type="checkbox" name="selected_accounts" value="<%=resultado.getString("email") %>">
 				<%=resultado.getString("email") %>
 				</th>			    
 			</tr>	
