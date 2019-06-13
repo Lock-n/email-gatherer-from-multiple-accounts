@@ -91,7 +91,6 @@ if(texto != null && !texto.equals(""))
        message.setContent(multipart); 
        
        
-       Transport.send(message); 
        
        Transport transport = mailSession.getTransport("smtp");
        
