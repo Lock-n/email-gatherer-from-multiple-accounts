@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="bd.dbos.EmailAccount"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -11,6 +13,20 @@
 
 
 <form action="send_email_b.jsp" method="post">
+
+	Selecione a conta de email:
+	<select name="name_email" id="name_email">
+	<%
+	ArrayList<EmailAccount> contasE = (ArrayList<EmailAccount>)session.getAttribute("contasE");
+		for(EmailAccount conta : contasE)
+		{
+			%> <option value="<%=conta.getEmail()%>"> <%=conta.getEmail() %> </option> <%
+		}
+	%>
+	</select>
+	
+	</br>
+	</br>
 	Assunto:
 	<input type="text" name="assunto" id="assunto" placeholder="Assunto">
 	</br>

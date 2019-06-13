@@ -1,3 +1,4 @@
+<%@page import="bd.dbos.EmailAccount"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.io.*,java.util.*,javax.mail.*"%>
@@ -11,17 +12,27 @@ String texto = request.getParameter("texto");
 if(texto != null && !texto.equals(""))
 {
 
-	
-	String subject = request.getParameter("assunto"); 
-
     String assunto = request.getParameter("assunto"); 
 
-   String host = "smtp.gmail.com"; 
+   
   	
    
-   final String name_email_user = "joao.ferreira5569@gmail.com";
-   	final String senha = "pass1234#";
+   	final String name_email = (String)request.getParameter("name_email");//"joao.ferreira5569@gmail.com";
+   	
+   	ArrayList<EmailAccount> contasE = (ArrayList<EmailAccount>)session.getAttribute("contasE");
+   	EmailAccount contaE;
+   	
+   	for(int i=0;;i++)
+	{
+		if(name_email.equals(contasE.get(i).getEmail()))
+		{
+			contaE = contasE.get(i);
+			break;
+		}
+	}  	
 
+   	final String senha = contaE.getPassword();//"pass1234#";
+   	String host = contaE.getServer_send_protocol();//"smtp.gmail.com"; 
    	
    	Properties properties = System.getProperties(); 
    	properties.put("mail.smtp.host", host); 
@@ -31,7 +42,7 @@ if(texto != null && !texto.equals(""))
    	Session mailSession = Session.getInstance(properties,
             new javax.mail.Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(name_email_user, senha);
+                    return new PasswordAuthentication(name_email, senha);
                 }
    		});
    	
@@ -64,7 +75,7 @@ if(texto != null && !texto.equals(""))
        }
       
        
-       message.setFrom(new InternetAddress(name_email_user)); 
+       message.setFrom(new InternetAddress(name_email)); 
        
        message.setSubject(assunto);
        
@@ -84,7 +95,7 @@ if(texto != null && !texto.equals(""))
        
        Transport transport = mailSession.getTransport("smtp");
        
-       transport.connect("smtp.gmail.com", name_email_user, senha);
+       transport.connect("smtp.gmail.com", name_email, senha);
        transport.sendMessage(message, message.getAllRecipients());
        transport.close();
        
@@ -106,9 +117,7 @@ if(texto != null && !texto.equals(""))
 <body> 
 <center> <h1>Enviando arquivo usando JSP...</h1> </center> 
 <p align="center"> 
-<% out.println("Resultado: " + result + "\n");
-	out.println("Resultado: " + texto + "\n");
-%> 
+<% out.println("Resultado: " + result + "\n");%> 
 </p>
 </body>
 </html>

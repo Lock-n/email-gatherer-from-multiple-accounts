@@ -33,7 +33,7 @@
 	
 	if(verConta!=null)
 		if(verConta.equals("true"))
-			response.sendRedirect("list_email_accounts_b.jsp");
+			response.sendRedirect("send_email.jsp");//("list_email_accounts_b.jsp");
 	
 	if(altSenha!=null)
 		if(altSenha.equals("true"))
