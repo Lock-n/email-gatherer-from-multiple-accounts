@@ -10,7 +10,7 @@
 
 
 
-<form action="send_email_b.jsp" method="post" enctype="multipart/form-data">
+<form action="send_email_b.jsp" method="post">
 	Assunto:
 	<input type="text" name="assunto" id="assunto" placeholder="Assunto">
 	</br>
@@ -28,7 +28,7 @@
 	</br>
 	</br>
 	Texto:
-	<textarea name="texto" id="texto" placeholder="Texto" cols="40" rows="5"></textarea>
+	<textarea type="text" name="texto" id="texto" placeholder="Texto" cols="40" rows="5"></textarea>
 	</br>
 	</br>
 	Tipo:
@@ -39,7 +39,7 @@
 	<input type="file" name="anexo" id="anexo" size="50" multiple>
 	</br>
 	</br>
-	<input type="submit" value="Enviar">
+	<button>AA</button>
 	</form>
 </body>
 </html>
