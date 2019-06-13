@@ -16,6 +16,7 @@ java.io.FileInputStream, email.EmailHelper, java.util.Queue, java.util.LinkedLis
 			
 			String[] loginContas = request.getParameterValues("contas");
 		
+			if (loginContas != null)
 			for(String login : loginContas)
 			{
 				

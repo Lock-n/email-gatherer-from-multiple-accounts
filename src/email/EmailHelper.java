@@ -27,10 +27,11 @@ public class EmailHelper {
 	        BodyPart bodyPart = mimeMultipart.getBodyPart(i);
 	        if (bodyPart.isMimeType("text/plain")) {
 	            result = result + "\n" + bodyPart.getContent();
-	            break; // without break same text appears twice in my tests
+	            //break; // without break same text appears twice in my tests
 	        } else if (bodyPart.isMimeType("text/html")) {
 	            String html = (String) bodyPart.getContent();
-	            result = result + "\n" + html;//org.jsoup.Jsoup.parse(html).text();
+	            result = result + "\n" + "#BEGIN-IFRAME#" + html.replace("<", "#BEGIN-TAG")
+	            .replace(">", "#END-TAG") + "#END-IFRAME#";//org.jsoup.Jsoup.parse(html).text();
 	        } else if (bodyPart.getContent() instanceof MimeMultipart){
 	            result = result + getTextFromMimeMultipart((MimeMultipart)bodyPart.getContent());
 	        }

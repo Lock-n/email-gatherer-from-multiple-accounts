@@ -15,7 +15,7 @@
 		String name = (String)session.getAttribute("name");
 		MeuResultSet resultado = EmailAccounts.getEmailAccountsByUser(name);
 		
-		%><form action="view_emails.jsp" method="post"> <% 
+		%><form action="main.jsp" method="post"> <% 
 		
 		do{
 	%>			
