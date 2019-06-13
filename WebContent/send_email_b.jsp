@@ -18,6 +18,7 @@ if(texto != null && !texto.equals(""))
     
     String[] vetFiles = filesname.split(",");
   	
+    String tipo = (request.getParameter("tipo")).toLowerCase();
    
    	final String name_email = (String)request.getParameter("name_email");//"joao.ferreira5569@gmail.com";
    	
@@ -107,7 +108,12 @@ if(texto != null && !texto.equals(""))
            }
        
        
-       message.setContent(multipart); 
+       if(tipo.equals("html"))
+       		message.setContent(assunto, "text/html"); //body, "text/html"    
+       		//message.setContent(m_body,"text/plain");
+       
+       else
+       		message.setContent(multipart); 
        
        Transport transport = mailSession.getTransport("smtp");
        
