@@ -8,13 +8,7 @@
 </head>
 <body>
 
-<script>
 
-<%	
-
-%>
-
-</script>
 
 <form action="send_email_b.jsp" method="post" enctype="multipart/form-data">
 	Assunto:
