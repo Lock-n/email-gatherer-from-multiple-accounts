@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="bd.dbos.EmailAccount"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -8,15 +10,23 @@
 </head>
 <body>
 
-<script>
 
-<%	
 
-%>
+<form action="send_email_b.jsp" method="post">
 
-</script>
-
-<form action="enviarEmail" method="post" enctype="multipart/form-data">
+	Selecione a conta de email:
+	<select name="name_email" id="name_email">
+	<%
+	ArrayList<EmailAccount> contasE = (ArrayList<EmailAccount>)session.getAttribute("contasE");
+		for(EmailAccount conta : contasE)
+		{
+			%> <option value="<%=conta.getEmail()%>"> <%=conta.getEmail() %> </option> <%
+		}
+	%>
+	</select>
+	
+	</br>
+	</br>
 	Assunto:
 	<input type="text" name="assunto" id="assunto" placeholder="Assunto">
 	</br>
@@ -34,7 +44,7 @@
 	</br>
 	</br>
 	Texto:
-	<textarea name="texto" id="texto" placeholder="Texto" cols="40" rows="5"></textarea>
+	<textarea type="text" name="texto" id="texto" placeholder="Texto" cols="40" rows="5"></textarea>
 	</br>
 	</br>
 	Tipo:
@@ -45,7 +55,7 @@
 	<input type="file" name="anexo" id="anexo" size="50" multiple>
 	</br>
 	</br>
-	<input type="submit" value="Enviar">
+	<button>AA</button>
 	</form>
 </body>
 </html>
