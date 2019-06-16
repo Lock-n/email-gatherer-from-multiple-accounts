@@ -827,4 +827,9 @@
  
  li.email-account {
  	padding: 10px 0px 10px 0px !important;
+ 	cursor: pointer;
+ }
+ 
+ li.email-account:hover {
+ 	background: #282d36;
  }
