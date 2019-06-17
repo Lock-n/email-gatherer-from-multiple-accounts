@@ -12,15 +12,18 @@
 		try{
 			String nome  = (String)session.getAttribute("name");
 			String senha = request.getParameter("nova_senha");
+			
+			if ((nome == null) || (senha == null))
+				response.sendRedirect("change_password_user.jsp?error=Dados incompletos");
 		
 			User usuario= new User(nome, senha);
 			
 			Users.alterar(usuario);
-			response.sendRedirect("hub.jsp");
+			response.sendRedirect("main.jsp");
 		}
 		catch(Exception erro){
 			erro.printStackTrace();
-			response.sendRedirect("sign_up_new_user.jsp?error=true");
+			response.sendRedirect("change_password_user.jsp?error=Erro");
 	%>
 			<p>Erro ao alterar senha de usuario, tente novamente mais tarde.</p>
 	<%

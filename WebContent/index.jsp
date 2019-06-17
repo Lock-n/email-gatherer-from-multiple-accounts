@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<% if (session.getAttribute("name") != null) response.sendRedirect("main.jsp"); %>
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -28,8 +29,6 @@
           <h1>Cadastre se</h1>
           
           <form action="sign_up_new_user_b.jsp" method="post">
-          
-          <!-- -->
 
           <div class="field-wrap">
             <label>

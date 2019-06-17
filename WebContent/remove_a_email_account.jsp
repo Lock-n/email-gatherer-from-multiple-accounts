@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<% if (session.getAttribute("name") == null) response.sendRedirect("log_in_user.jsp"); %>
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -15,7 +16,11 @@
 </head>
 
 <body>
-
+	<% 
+		String email = request.getParameter("email"); 
+		if (email == null)
+			email = "";
+	%>
   <div class="form">
       
       <!--
@@ -30,21 +35,14 @@
           <h1>Informe o Email que deseja remover</h1>
           
           <form action="remove_a_email_account_b.jsp" method="post">
-          
-           
-
-          <div class="field-wrap">
-            <label>
-              Email que sera removido<span class="req">*</span>
-            </label>
-            <input type="email" id="email" name="email"   value="<%= request.getParameter("email")%> required autocomplete="off"/>
-          </div>
-          
-       
-          
-         
-          <button type="submit" class="button button-block"/>Remover</button>
-          
+	          <div class="field-wrap">
+	            <label>
+	              Email que sera removido<span class="req">*</span>
+	            </label>
+	            <input type="email" id="email" name="email" value="<%=email%>" required autocomplete="off"/>
+	          </div>
+	          
+	          <button type="submit" class="button button-block">Remover</button>
           </form>
 
         </div>
@@ -55,14 +53,7 @@
       
 </div> <!-- /form -->
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-
-  
-
     <script  src="./script/script.js"></script>
-
-
-
-
 </body>
 
 </html>

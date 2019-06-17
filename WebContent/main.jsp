@@ -3,6 +3,7 @@
     pageEncoding="UTF-8" import="bd.daos.*, bd.dbos.*, java.util.Properties, javax.mail.*, java.io.File,
 java.io.FileInputStream, email.EmailHelper, java.util.Queue, java.util.LinkedList, java.util.Arrays, 
 java.util.Date, java.text.SimpleDateFormat"%>
+<% if (session.getAttribute("name") == null) response.sendRedirect("log_in_user.jsp"); %>
 <html>
 <head>
   <meta charset="UTF-8">

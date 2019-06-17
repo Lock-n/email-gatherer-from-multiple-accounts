@@ -15,6 +15,10 @@
 			String nome  = request.getParameter("nome");
 			String senha = request.getParameter("senha");
 		
+			if (nome == null || senha == null) {
+				response.sendRedirect("index.jsp?error=true");
+			}
+			
 			User usuario= new User(nome, senha);
 			
 			Users.incluir(usuario);

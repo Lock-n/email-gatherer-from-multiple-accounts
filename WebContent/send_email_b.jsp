@@ -1,4 +1,4 @@
-<%@page import="bd.dbos.EmailAccount"%>
+<%@page import="bd.dbos.EmailAccount, java.util.Iterator"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.io.*,java.util.*,javax.mail.*"%>
@@ -14,26 +14,35 @@ if(texto != null && !texto.equals(""))
 
     String assunto = request.getParameter("assunto"); 
     
-    String filesname = request.getParameter("anexo");
-    
-    String[] vetFiles = filesname.split(",");
+    String filesname = request.getParameter("anexo");    
   	
-    String tipo = (request.getParameter("tipo")).toLowerCase();
+    String tipo = request.getParameter("tipo");
    
-   	final String name_email = (String)request.getParameter("name_email");//"joao.ferreira5569@gmail.com";
+   	final String name_email = request.getParameter("name_email");//"joao.ferreira5569@gmail.com";
+   	
+   	if ((assunto == null) || (filesname == null) || (tipo == null) || (name_email == null))
+   		response.sendRedirect("send_email.jsp?error=Dados incompletos ou inválidos");
+   	
+   	String[] vetFiles = filesname.split(",");
+   	tipo = tipo.toLowerCase();
    	
    	ArrayList<EmailAccount> contasE = (ArrayList<EmailAccount>)session.getAttribute("contasE");
-   	EmailAccount contaE;
+   	EmailAccount contaE = null;
    	
-   	for(int i=0;;i++)
+   	Iterator<EmailAccount> it = contasE.iterator();
+   	while (it.hasNext())
 	{
-		if(name_email.equals(contasE.get(i).getEmail()))
+   		EmailAccount account = it.next();
+		if(name_email.equals(account.getEmail()))
 		{
-			contaE = contasE.get(i);
+			contaE = account;
 			break;
 		}
 	}  	
 
+   	if (contaE == null)
+   		response.sendRedirect("send_email.jsp?error=Dados incompletos ou inválidos");
+   	
    	final String senha = contaE.getPassword();//"pass1234#";
    	String host = contaE.getServer_send_protocol();//"smtp.gmail.com"; 
    	

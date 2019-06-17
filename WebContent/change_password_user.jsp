@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<% if (session.getAttribute("name") == null) response.sendRedirect("log_in_user.jsp"); %>
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -10,8 +11,6 @@
 
   
       <link rel="stylesheet" href="./css/style.css">
-
-  
 </head>
 
 <body>

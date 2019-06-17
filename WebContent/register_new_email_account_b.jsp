@@ -18,23 +18,25 @@
           	String server_receive_address   = request.getParameter("server_receive_address"); 				// endereco do servidor de recepcao
           	String server_send_protocol  = request.getParameter("server_send_protocol");	// protocolo de envio 
           	String server_receive_protocol  = request.getParameter("server_receive_protocol");	// protocolo de recebimento 
-          	int    server_send_port      = Integer.parseInt(request.getParameter("server_send_port"));	// porta de envio 
-          	int    server_receive_port      = Integer.parseInt(request.getParameter("server_receive_port"));	// porta de recebimento
+          	String    server_send_ports      = request.getParameter("server_send_port");	// porta de envio 
+          	String    server_receive_ports      = request.getParameter("server_receive_port");	// porta de recebimento
      		String name_user        = (String)session.getAttribute("name");// talvez tenha que ter request.getSession
 
+     		if (
+     			(email == null) || (password == null) || (server_send_address == null) || (server_receive_address == null) ||
+     			(server_send_protocol == null) || (server_receive_protocol == null) || (server_send_ports == null) ||
+     			(server_receive_ports == null) || (name_user == null)
+     			)
+     			response.sendRedirect("register_new_email_account.jsp?error=Dados incompletos");
+     		
+     		int server_receive_port = Integer.parseInt(server_receive_ports);
+     		int server_send_port = Integer.parseInt(server_send_ports);
+     		
           	EmailAccount contaE = new EmailAccount(email, password, server_send_address, server_receive_address, server_send_protocol, server_receive_protocol, server_send_port, server_receive_port, name_user);
           	EmailAccounts.incluir(contaE);
-          	
-          	
-          	MeuResultSet resultado= EmailAccounts.getEmailAccountsByUser((String)session.getAttribute("name"));
-			ArrayList<EmailAccount> contasE = new ArrayList<EmailAccount>();
-			do{
-				contaE = new EmailAccount(resultado.getString("email"), resultado.getString("password"), resultado.getString("server_send_address"), 
-		        		   resultado.getString("server_receive_address"), resultado.getString("server_send_protocol"),
-		        		   resultado.getString("server_receive_protocol"), resultado.getInt("server_send_port"),
-		        		   resultado.getInt("server_receive_port"), resultado.getString("name_user"));
-				contasE.add(contaE);
-			}while(resultado.next());
+          				
+			ArrayList<EmailAccount> contasE = (ArrayList<EmailAccount>)session.getAttribute("contasE");
+			contasE.add(contaE);			
 			session.setAttribute("contasE", contasE);
           	
           	
@@ -42,7 +44,7 @@
           }
           catch(Exception erro){
                erro.printStackTrace();
-               
+               response.sendRedirect("main.jsp?error=Erro ao cadastrar nova conta de email");
      %>
           <p>Erro ao cadastrar conta, tente novamente mais tarde.</p>
      <%
