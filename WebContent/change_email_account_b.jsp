@@ -25,8 +25,11 @@
          			(email == null) || (password == null) || (server_send_address == null) || (server_receive_address == null) ||
          			(server_send_protocol == null) || (server_receive_protocol == null) || (server_send_ports == null) ||
          			(server_receive_ports == null) || (name_user == null)
-         			)
-         			response.sendRedirect("change_email_account.jsp?error=Dados incompletos");
+         			) {
+       			response.sendRedirect("change_email_account.jsp?error=Dados incompletos");
+       			return;
+       		}
+         		
          		
        		int server_receive_port = Integer.parseInt(server_receive_ports);
        		int server_send_port = Integer.parseInt(server_send_ports);
@@ -35,11 +38,12 @@
           	
       		EmailAccounts.alterar(contaE);
           	response.sendRedirect("main.jsp");
+          	return;
           }
           catch(Exception erro){
                erro.printStackTrace();
                response.sendRedirect("main.jsp?error=Erro ao alterar conta");
-               
+               return;
      %>
           <p>Erro ao alterar conta, tente novamente mais tarde.</p>
      <%

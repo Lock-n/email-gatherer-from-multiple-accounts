@@ -1,9 +1,25 @@
+<%@page import="javax.mail.Flags.Flag"%>
+<%@page import="jdk.nashorn.internal.ir.Flags"%>
 <%@page import="java.util.ArrayList, java.util.HashSet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="bd.daos.*, bd.dbos.*, java.util.Properties, javax.mail.*, java.io.File,
 java.io.FileInputStream, email.EmailHelper, java.util.Queue, java.util.LinkedList, java.util.Arrays, 
-java.util.Date, java.text.SimpleDateFormat"%>
-<% if (session.getAttribute("name") == null) response.sendRedirect("log_in_user.jsp"); %>
+java.util.Date, java.text.SimpleDateFormat, java.util.HashMap, java.util.TreeSet, java.util.Iterator"%>
+<% 
+String log_out = request.getParameter("log_out");
+if (log_out != null)
+	if (log_out.equals("log_out")) {
+		session.invalidate();
+		response.sendRedirect("index.jsp");
+		return;
+	}
+
+if (session.getAttribute("name") == null) {
+	response.sendRedirect("index.jsp");
+	return;
+}
+	 
+%>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -70,7 +86,8 @@ java.util.Date, java.text.SimpleDateFormat"%>
      </span>Mail</div>
      <a class="compose-button" href="send_email.jsp" onclick="window.location.href = 'send_email.jsp';">Compose</a>
      <menu class="menu-segment">
-     <form method="post" action="<%String uri = request.getRequestURI();%><%=uri.substring(uri.lastIndexOf("/")+1)%>" id="select_email_accounts">
+     <% String uri = request.getRequestURI(); uri = uri.substring(uri.lastIndexOf("/")+1); %>
+     <form method="post" action="<%=uri%>" id="select_email_accounts">
 		<ul>
 			<li class="title">
 				Accounts
@@ -85,7 +102,15 @@ java.util.Date, java.text.SimpleDateFormat"%>
 		-->
 		<%
 			String[] selected_accounts_values = request.getParameterValues("selected_accounts");
-			HashSet<String> email_accounts = new HashSet<>(
+		
+			if (selected_accounts_values == null) {
+				selected_accounts_values = (String[]) session.getAttribute("selected_accounts_values");
+			}
+			else {
+				session.setAttribute("selected_accounts_values", selected_accounts_values);
+			}
+			
+			HashSet<String> emails = new HashSet<>(
 					Arrays.asList((selected_accounts_values == null ? new String[0] : selected_accounts_values))
 					);
 			
@@ -99,7 +124,7 @@ java.util.Date, java.text.SimpleDateFormat"%>
 				EmailAccount account = accounts.get(i);
 				String active = "";
 				String checked = "";
-				if (email_accounts.contains(account.getEmail())) {
+				if (emails.contains(account.getEmail())) {
 					checked = "checked";
 					active = " active";
 					
@@ -109,12 +134,12 @@ java.util.Date, java.text.SimpleDateFormat"%>
 				%>
 			<li class="email-account<%=active%>">
 				<div>
-					<input type="hidden" id="server_send_address" name="server_send_address" value="<%=account.getServer_send_address()%>">
-				  	<input type="hidden" id="server_receive_address" name="server_receive_address" value="<%=account.getServer_receive_address()%>">
-				  	<input type="hidden" id="server_send_port" name="server_send_port" value="<%=account.getServer_send_port()%>">
-				  	<input type="hidden" id="server_receive_port" name="server_receive_port" value="<%=account.getServer_receive_port()%>">
-				  	<input type="hidden" id="server_send_protocol" name="server_send_protocol" value="<%=account.getServer_send_protocol()%>">
-				  	<input type="hidden" id="server_receive_protocol" name="server_receive_protocol" value="<%=account.getServer_receive_protocol()%>">
+					<input type="hidden" id="server_send_address" value="<%=account.getServer_send_address()%>">
+				  	<input type="hidden" id="server_receive_address" value="<%=account.getServer_receive_address()%>">
+				  	<input type="hidden" id="server_send_port" value="<%=account.getServer_send_port()%>">
+				  	<input type="hidden" id="server_receive_port" value="<%=account.getServer_receive_port()%>">
+				  	<input type="hidden" id="server_send_protocol" value="<%=account.getServer_send_protocol()%>">
+				  	<input type="hidden" id="server_receive_protocol" value="<%=account.getServer_receive_protocol()%>">
 				  	<input type="hidden" id="password" name="password" value="<%=account.getPassword()%>">
 				  	<div class="checkbox-wrapper">
 				  		<input type="checkbox" name="selected_accounts" id="<%=i%>c" value="<%=account.getEmail()%>" <%=checked%>>
@@ -150,6 +175,12 @@ java.util.Date, java.text.SimpleDateFormat"%>
      <div class="menu-segment">
        <ul class="labels">
          <li class="title menu-item-button" onclick="window.location.href = 'change_password_user.jsp';"><div>Change password</div></li>
+         <li class="title menu-item-button" onclick="$(this).find('form[action=\'<%= uri %>\']').submit();">
+         	<div>Log out</div>
+         	<form action="<%= uri %>" method="post">
+         		<input type="hidden" name="log_out" value="log_out">
+         	</form>
+         </li>
          <!--<li><a href="#">Dribbble <span class="ball pink"></span></a></li>
          <li><a href="#">Roommates <span class="ball green"></span></a></li>
          <li><a href="#">Bills <span class="ball blue"></span></a></li>-->
@@ -180,21 +211,26 @@ java.util.Date, java.text.SimpleDateFormat"%>
      </div>
      <h1 class="page-title"><a class="sidebar-toggle-btn trigger-toggle-sidebar"><span class="line"></span><span class="line"></span><span class="line"></span><span class="line line-angle1"></span><span class="line line-angle2"></span></a>Inbox<a><span class="icon glyphicon glyphicon-chevron-down"></span></a></h1>
    </header>
-   <div class="action-bar">
-     <ul>
-       <li><a class="icon circle-icon glyphicon glyphicon-chevron-down"></a></li>
-       <li><a class="icon circle-icon glyphicon glyphicon-refresh"></a></li>
-       <li><a class="icon circle-icon glyphicon glyphicon-share-alt"></a></li>
-       <li><a class="icon circle-icon red glyphicon glyphicon-remove"></a></li>
-       <li><a class="icon circle-icon red glyphicon glyphicon-flag"></a></li>
-     </ul>
-   </div>
-   <div id="main-nano-wrapper" class="nano has-scrollbar">
-     <div class="nano-content" tabindex="0" style="right: -17px;">
-       <ul class="message-list">
-       </ul><a href="#" class="load-more-link">Show more messages</a>
-     </div>
-   <div class="nano-pane"><div class="nano-slider" style="height: 20px; transform: translate(0px, 0px);"></div></div></div>
+   <form action="<%= uri %>" method="post" id="form-delete-messages">
+   	   <div class="action-bar">
+	     <ul>
+	       <!--<li><a class="icon circle-icon glyphicon glyphicon-chevron-down"></a></li>
+	       <li><a class="icon circle-icon glyphicon glyphicon-refresh"></a></li>
+	       <li><a class="icon circle-icon glyphicon glyphicon-share-alt"></a></li>-->
+	       <li><a class="icon circle-icon red glyphicon glyphicon-remove" onclick="$('form#form-delete-messages').submit();"></a></li>
+	       <!--<li><a class="icon circle-icon red glyphicon glyphicon-flag"></a></li>-->
+	     </ul>
+	   </div>
+	   <div id="main-nano-wrapper" class="nano has-scrollbar">
+	     <div class="nano-content" tabindex="0" style="right: -17px;">
+	       <ul class="message-list">
+	       </ul><a href="#" class="load-more-link">Show more messages</a>
+	     </div>
+	     <div class="nano-pane">
+	       <div class="nano-slider" style="height: 20px; transform: translate(0px, 0px);"></div>
+	     </div>
+	   </div>
+   </form>
  </main>
  <div id="message">
    <div class="header">
@@ -216,7 +252,7 @@ java.util.Date, java.text.SimpleDateFormat"%>
              <p>| Creature firmament so give replenish The saw man creeping, man said forth from that. Fruitful multiply lights air. Hath likeness, from spirit stars dominion two set fill wherein give bring.</p>
              <p>| Gathering is. Lesser Set fruit subdue blessed let. Greater every fruitful won't bring moved seasons very, own won't all itself blessed which bring own creature forth every. Called sixth light.</p>
            </div>
-           <div class="tool-box"><a href="#" class="circle-icon small glyphicon glyphicon-share-alt"></a><a href="#" class="circle-icon small red-hover glyphicon glyphicon-remove"></a><a href="#" class="circle-icon small red-hover glyphicon glyphicon-flag"></a></div>
+           <!--<div class="tool-box"><a href="#" class="circle-icon small glyphicon glyphicon-share-alt"></a><a href="#" class="circle-icon small red-hover glyphicon glyphicon-remove"></a><a href="#" class="circle-icon small red-hover glyphicon glyphicon-flag"></a></div>-->
          </li>
          <!--<li class="received">
            <div class="details">
@@ -425,10 +461,10 @@ java.util.Date, java.text.SimpleDateFormat"%>
     	date = date.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
     	
         let element = $("<li class='unread'><div class='col col-1'><span class='dot'></span><div class='checkbox-wrapper'><input type='checkbox' id='" +
-          id + "'><label for=\"" + id + "\" class=\"toggle\"></label></div><p class=\"title\">" +
+          id + "' name='email_id' value='" + id + "'><label for=\"" + id + "\" class=\"toggle\"></label></div><p class=\"title\">" +
               sender + "</p><span class=\"star-toggle glyphicon glyphicon-star-empty\"></span></div>" +
             "<div class=\"col col-2\">" +
-              "<div class=\"subject\">" + subject + "<span class=\"teaser\"> &nbsp;â&nbsp; " + body + "</span></div>" +
+              "<div class=\"subject\">" + subject + "<span class=\"teaser\"> &nbsp;&nbsp; " + body + "</span></div>" +
               "<div class=\"date\">" + time + "</div>" +
             "</div>" +
           "</li>");
@@ -503,9 +539,28 @@ java.util.Date, java.text.SimpleDateFormat"%>
     	});
     	
     	<%
-    	for(EmailAccount contaE : selected_accounts)
+    	String[] selected_emails = request.getParameterValues("email_id");
+    	
+    	HashMap<Integer, TreeSet<Integer>> selected_emails_indexes = new HashMap<Integer, TreeSet<Integer>>();
+    	
+    	if (selected_emails != null) {
+			for (int i = 0; i < selected_emails.length; i++) {
+				String[] s = selected_emails[i].split("-");
+				
+				int account_index = Integer.parseInt(s[0]);
+				int message_index = Integer.parseInt(s[1]);
+				
+				if (!selected_emails_indexes.containsKey(account_index))
+					selected_emails_indexes.put(account_index, new TreeSet<Integer>());
+				
+				selected_emails_indexes.get(account_index).add(message_index);
+			}
+    	}
+    	
+    	Iterator<EmailAccount> it = selected_accounts.iterator();
+    	for(int counter_selected_accounts = 0; it.hasNext(); counter_selected_accounts++)
     	{
-    		
+    		EmailAccount contaE = it.next();
     		//EmailAccount contaE = EmailAccounts.getEmailAccountByEmail(login);
     		
     		String email = contaE.getEmail();
@@ -552,18 +607,28 @@ java.util.Date, java.text.SimpleDateFormat"%>
     				  Folder f = store.getFolder("INBOX");
     				  
     				  if ((f.getType() & Folder.HOLDS_MESSAGES) != 0) {
-    					  f.open(Folder.READ_ONLY);
+    					  f.open(Folder.READ_WRITE);
     					  Message[] messages = f.getMessages();
+    					  if (selected_emails_indexes.containsKey(counter_selected_accounts)) {
+    						  Iterator<Integer> selected_messages_in_descending_order = selected_emails_indexes.get(counter_selected_accounts).descendingIterator();
+    						while (selected_messages_in_descending_order.hasNext()) {
+    							messages[selected_messages_in_descending_order.next()].setFlag(Flag.DELETED, true);
+    						}
+    					  }
     					  
     					  for (int i = 0; i < messages.length; i++) {
     						Message message = messages[i];
+    						
+    						if (message.isSet(Flag.DELETED))
+    							continue;
+    						
     						String senders = "";
     						Address[] addresses = message.getFrom();
     					  
     						if (addresses.length > 0) {
     							senders += addresses[0].toString();
     							for (int j = 1; j < addresses.length; j++) {
-    								senders += "; " + addresses[i].toString();  
+    								senders += "; " + addresses[j].toString();  
     							}
     						}
     						
@@ -573,7 +638,7 @@ java.util.Date, java.text.SimpleDateFormat"%>
     						if (addresses.length > 0) {
     							recipients += addresses[0].toString();
     							for (int j = 1; j < addresses.length; j++) {
-    								recipients += "; " + addresses[i].toString();  
+    								recipients += "; " + addresses[j].toString();  
     							}
     						}
     						
@@ -583,14 +648,15 @@ java.util.Date, java.text.SimpleDateFormat"%>
     						SimpleDateFormat date_format = new SimpleDateFormat("dd/MM/yyyy");
     						String date = date_format.format(sent_date);
     						%>
-    						add_email_to_list('<%=i%>', '<%=senders%>', '<%=
+    						add_email_to_list('<%=new Integer(counter_selected_accounts).toString() + "-" + new Integer(message.getMessageNumber()-1).toString()
+    						%>', '<%=senders%>', '<%=
     						recipients%>', '<%=message.getSubject()%>', '<%=EmailHelper.getTextFromMessage(message)
     						.replace("\r", "").replace("'", "\\'").replace("\n", "\\n' + '")%>', '<%=time%>', 
     						'<%=date%>');
     						<%
     					  }
+    					  
     					  f.close(true);
-    				  //}
     				  
     				  /*if ((f.getType() & Folder.HOLDS_FOLDERS) != 0) {
     					  folders.addAll(Arrays.asList(f.list()));						  

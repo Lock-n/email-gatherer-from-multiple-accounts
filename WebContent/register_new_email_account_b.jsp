@@ -27,7 +27,10 @@
      			(server_send_protocol == null) || (server_receive_protocol == null) || (server_send_ports == null) ||
      			(server_receive_ports == null) || (name_user == null)
      			)
+     		{
      			response.sendRedirect("register_new_email_account.jsp?error=Dados incompletos");
+     			return;
+     		}     			
      		
      		int server_receive_port = Integer.parseInt(server_receive_ports);
      		int server_send_port = Integer.parseInt(server_send_ports);
@@ -39,12 +42,13 @@
 			contasE.add(contaE);			
 			session.setAttribute("contasE", contasE);
           	
-          	
           	response.sendRedirect("main.jsp");
+          	return;
           }
           catch(Exception erro){
                erro.printStackTrace();
                response.sendRedirect("main.jsp?error=Erro ao cadastrar nova conta de email");
+               return;
      %>
           <p>Erro ao cadastrar conta, tente novamente mais tarde.</p>
      <%

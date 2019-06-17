@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<% if (session.getAttribute("name") != null) response.sendRedirect("main.jsp"); %>
+<% if (session.getAttribute("name") != null) { response.sendRedirect("main.jsp"); return; } %>
 <!DOCTYPE html>
 <html lang="en" >
 <head>

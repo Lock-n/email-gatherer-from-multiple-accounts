@@ -14,8 +14,10 @@
 
      	 	String email = request.getParameter("email");
      	 	
-     	 	if (email == null)
+     	 	if (email == null) {
      	 		response.sendRedirect("remove_a_email_account.jsp?error=Dados incompletos");
+     	 		return;
+     	 	}     	 		
           	
           	EmailAccounts.excluir(email);
 			
@@ -32,11 +34,13 @@
 			session.setAttribute("contasE", contasE);         	
           	
           	response.sendRedirect("main.jsp");
+          	return;
      	}
           catch(Exception erro){
                erro.printStackTrace();
                
                response.sendRedirect("main.jsp?error=Erro ao excluir conta de email");
+               return;
 	%>
 
           <p>Erro ao excluir conta, tente novamente mais tarde.</p>

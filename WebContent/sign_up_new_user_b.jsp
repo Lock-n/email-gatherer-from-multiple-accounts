@@ -17,6 +17,7 @@
 		
 			if (nome == null || senha == null) {
 				response.sendRedirect("index.jsp?error=true");
+				return;
 			}
 			
 			User usuario= new User(nome, senha);
@@ -37,10 +38,12 @@
 			session.setAttribute("name", nome);
 			session.setAttribute("contasE", contasE);
 			response.sendRedirect("main.jsp");
+			return;
 		}
 		catch(Exception erro){
 			erro.printStackTrace();
 			response.sendRedirect("index.jsp?error=true");
+			return;
 	%>
 			<p>Erro ao cadastrar usuario, tente novamente mais tarde.</p>
 	<%

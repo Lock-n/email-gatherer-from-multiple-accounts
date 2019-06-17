@@ -42,12 +42,12 @@
 				}
 				else
 				{
-					response.sendRedirect("log_in_user.jsp?error=Senha incorreta");
+					response.sendRedirect("index.jsp?error=Senha incorreta");
 				}
 			}
 			else
 			{
-			 	response.sendRedirect("log_in_user.jsp?error=Nome de usuario não existe");
+			 	response.sendRedirect("index.jsp?error=Nome de usuario não existe");
 			}
 		}
 		catch (Exception e) {

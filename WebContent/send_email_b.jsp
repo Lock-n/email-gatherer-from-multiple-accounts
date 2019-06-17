@@ -21,7 +21,11 @@ if(texto != null && !texto.equals(""))
    	final String name_email = request.getParameter("name_email");//"joao.ferreira5569@gmail.com";
    	
    	if ((assunto == null) || (filesname == null) || (tipo == null) || (name_email == null))
+   	{
    		response.sendRedirect("send_email.jsp?error=Dados incompletos ou inválidos");
+   		return;
+   	}
+   		
    	
    	String[] vetFiles = filesname.split(",");
    	tipo = tipo.toLowerCase();
@@ -40,8 +44,10 @@ if(texto != null && !texto.equals(""))
 		}
 	}  	
 
-   	if (contaE == null)
+   	if (contaE == null) {
    		response.sendRedirect("send_email.jsp?error=Dados incompletos ou inválidos");
+   		return;
+   	}
    	
    	final String senha = contaE.getPassword();//"pass1234#";
    	String host = contaE.getServer_send_protocol();//"smtp.gmail.com"; 
