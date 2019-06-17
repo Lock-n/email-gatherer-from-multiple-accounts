@@ -37,7 +37,7 @@
             <label>
               Email que sera removido<span class="req">*</span>
             </label>
-            <input type="email" id="email" name="email" required autocomplete="off"/>
+            <input type="email" id="email" name="email"   value="<%= request.getParameter("email")%> required autocomplete="off"/>
           </div>
           
        

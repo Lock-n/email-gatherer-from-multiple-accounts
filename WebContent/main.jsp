@@ -47,14 +47,14 @@ java.util.Date, java.text.SimpleDateFormat"%>
       </div>
       <div class="modal-footer">
       <form method="post" action="" id="form_email_account_details_modal">
-      	<input type="hidden" id="email" value="">
-      	<input type="hidden" id="server_send_address" value="">
-	  	<input type="hidden" id="server_receive_address" value="">
-	  	<input type="hidden" id="server_send_port" value="">
-	  	<input type="hidden" id="server_receive_port" value="">
-	  	<input type="hidden" id="server_send_protocol" value="">
-	  	<input type="hidden" id="server_receive_protocol" value="">
-	  	<input type="hidden" id="password" value="">
+      	<input type="hidden" id="email" name="email" value="">
+      	<input type="hidden" id="server_send_address" name="server_send_address" value="">
+	  	<input type="hidden" id="server_receive_address" name="server_receive_address" value="">
+	  	<input type="hidden" id="server_send_port" name="server_send_port" value="">
+	  	<input type="hidden" id="server_receive_port" name="server_receive_port" value="">
+	  	<input type="hidden" id="server_send_protocol" name="server_send_protocol" value="">
+	  	<input type="hidden" id="server_receive_protocol" name="server_receive_protocol" value="">
+	  	<input type="hidden" id="password" name="password" value="">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" onclick='$("form#form_email_account_details_modal").attr("action", "change_email_account.jsp"); $("form#form_email_account_details_modal").submit();'>Change</button>
         <button type="button" class="btn btn-danger" onclick='$("form#form_email_account_details_modal").attr("action", "remove_a_email_account.jsp"); $("form#form_email_account_details_modal").submit();'>Delete</button>
@@ -108,13 +108,13 @@ java.util.Date, java.text.SimpleDateFormat"%>
 				%>
 			<li class="email-account<%=active%>">
 				<div>
-					<input type="hidden" id="server_send_address" value="<%=account.getServer_send_address()%>">
-				  	<input type="hidden" id="server_receive_address" value="<%=account.getServer_receive_address()%>">
-				  	<input type="hidden" id="server_send_port" value="<%=account.getServer_send_port()%>">
-				  	<input type="hidden" id="server_receive_port" value="<%=account.getServer_receive_port()%>">
-				  	<input type="hidden" id="server_send_protocol" value="<%=account.getServer_send_protocol()%>">
-				  	<input type="hidden" id="server_receive_protocol" value="<%=account.getServer_receive_protocol()%>">
-				  	<input type="hidden" id="password" value="<%=account.getPassword()%>">
+					<input type="hidden" id="server_send_address" name="server_send_address" value="<%=account.getServer_send_address()%>">
+				  	<input type="hidden" id="server_receive_address" name="server_receive_address" value="<%=account.getServer_receive_address()%>">
+				  	<input type="hidden" id="server_send_port" name="server_send_port" value="<%=account.getServer_send_port()%>">
+				  	<input type="hidden" id="server_receive_port" name="server_receive_port" value="<%=account.getServer_receive_port()%>">
+				  	<input type="hidden" id="server_send_protocol" name="server_send_protocol" value="<%=account.getServer_send_protocol()%>">
+				  	<input type="hidden" id="server_receive_protocol" name="server_receive_protocol" value="<%=account.getServer_receive_protocol()%>">
+				  	<input type="hidden" id="password" name="password" value="<%=account.getPassword()%>">
 				  	<div class="checkbox-wrapper">
 				  		<input type="checkbox" name="selected_accounts" id="<%=i%>c" value="<%=account.getEmail()%>" <%=checked%>>
 				  		<label for="<%=i%>c" class="toggle">

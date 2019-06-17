@@ -37,7 +37,7 @@
 					session.setAttribute("name", nome);
 					session.setAttribute("contasE", contasE);
 					
-					response.sendRedirect("hub.jsp");
+					response.sendRedirect("main.jsp");
 				}
 				else
 				{

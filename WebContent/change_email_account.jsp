@@ -27,7 +27,7 @@
       <div class="tab-content">
         
         <div >   
-          <h1>Cadastre uma conta de email</h1>
+          <h1>Altere uma conta de email</h1>
           
           <form action="change_email_account_b.jsp" method="post">
           
@@ -37,56 +37,56 @@
             <label>
               Email que sera alterado:<span class="req">*</span>
             </label>
-            <input type="email" id="email" name="email" required autocomplete="off"/>
+            <input type="email" id="email" name="email" value="<%= request.getParameter("email")%>" required autocomplete="off"/>
           </div>
           
           <div class="field-wrap">
             <label>
               Nova senha<span class="req">*</span>
             </label>
-            <input type="password" id="password" name="password" required autocomplete="off"/>
+            <input type="password" id="password" name="password" value="<%= request.getParameter("password")%>" required autocomplete="off"/>
           </div>
           
            <div class="field-wrap">
             <label>
              Novo endereço do servidor de envio<span class="req">*</span>
             </label>
-            <input type="text" id="server_address" name="server_send_address" required autocomplete="off"/>
+            <input type="text" id="server_address" name="server_send_address" value="<%= request.getParameter("server_send_address")%>" required autocomplete="off"/>
           </div>
           
            <div class="field-wrap">
             <label>
               Novo endereço do servidor de recepcao<span class="req">*</span>
             </label>
-            <input type="text" id="server_address" name="server_receive_address" required autocomplete="off"/>
+            <input type="text" id="server_address" name="server_receive_address" value="<%= request.getParameter("server_receive_address")%>" required autocomplete="off"/>
           </div>
           
            <div class="field-wrap">
             <label>
               Novo protocolo de envio<span class="req">*</span>
             </label>
-            <input type="text" id="server_protocol" name="server_send_protocol" required autocomplete="off"/>
+            <input type="text" id="server_protocol" name="server_send_protocol" value="<%= request.getParameter("server_send_protocol")%>" required autocomplete="off"/>
           </div>
           
            <div class="field-wrap">
             <label>
               Novo protocolo de recepcao<span class="req">*</span>
             </label>
-            <input type="text" id="server_protocol" name="server_receive_protocol" required autocomplete="off"/>
+            <input type="text" id="server_protocol" name="server_receive_protocol" value="<%= request.getParameter("server_receive_protocol")%>" required autocomplete="off"/>
           </div>
           
            <div class="field-wrap">
             <label>
               Nova porta de envio<span class="req">*</span>
             </label>
-            <input type="text" id="server_port" name="server_send_port" required autocomplete="off"/>
+            <input type="text" id="server_port" name="server_send_port" value="<%= request.getParameter("server_send_port")%>" required autocomplete="off"/>
           </div>
           
            <div class="field-wrap">
             <label>
               Nova porta de recepcao<span class="req">*</span>
             </label>
-            <input type="text" id="server_port" name="server_receive_port" required autocomplete="off"/>
+            <input type="text" id="server_port" name="server_receive_port"  value="<%= request.getParameter("server_receive_port")%>" required autocomplete="off"/>
           </div>
           
          

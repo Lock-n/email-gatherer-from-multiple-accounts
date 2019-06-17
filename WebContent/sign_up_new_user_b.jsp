@@ -32,11 +32,11 @@
 			
 			session.setAttribute("name", nome);
 			session.setAttribute("contasE", contasE);
-			response.sendRedirect("hub.jsp");
+			response.sendRedirect("main.jsp");
 		}
 		catch(Exception erro){
 			erro.printStackTrace();
-			response.sendRedirect("sign_up_new_user.jsp?error=true");
+			response.sendRedirect("index.jsp?error=true");
 	%>
 			<p>Erro ao cadastrar usuario, tente novamente mais tarde.</p>
 	<%

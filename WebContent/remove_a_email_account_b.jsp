@@ -29,7 +29,7 @@
 			session.setAttribute("contasE", contasE);
           	
           	
-          	response.sendRedirect("hub.jsp");
+          	response.sendRedirect("main.jsp");
      	}
           catch(Exception erro){
                erro.printStackTrace();

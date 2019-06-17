@@ -24,7 +24,7 @@
             	EmailAccount contaE = new EmailAccount(email, password, server_send_address, server_receive_address, server_send_protocol, server_receive_protocol, server_send_port, server_receive_port, name_user);
 	          	
        			EmailAccounts.alterar(contaE);
-	          	response.sendRedirect("hub.jsp");
+	          	response.sendRedirect("main.jsp");
           }
           catch(Exception erro){
                erro.printStackTrace();
