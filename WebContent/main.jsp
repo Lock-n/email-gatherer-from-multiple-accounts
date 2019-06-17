@@ -68,13 +68,13 @@ java.util.Date, java.text.SimpleDateFormat"%>
    <div class="nano-content" tabindex="0" style="right: -17px;">
      <div class="logo-container"><span class="logo glyphicon glyphicon-envelope">
      </span>Mail</div>
-     <a class="compose-button">Compose</a>
+     <a class="compose-button" href="send_email.jsp" onclick="window.location.href = 'send_email.jsp';">Compose</a>
      <menu class="menu-segment">
      <form method="post" action="<%String uri = request.getRequestURI();%><%=uri.substring(uri.lastIndexOf("/")+1)%>" id="select_email_accounts">
 		<ul>
 			<li class="title">
 				Accounts
-				<span class="icon add-account" onclick="window.location.replace('register_new_email_account.jsp');">+</span>
+				<span class="icon add-account" onclick="window.location.href = 'register_new_email_account.jsp';">+</span>
 			</li>
 		  <!--
 		<li class="active"><a href="#">Inbox<span> (43)</span></a></li>
@@ -149,12 +149,13 @@ java.util.Date, java.text.SimpleDateFormat"%>
      <div class="separator"></div>
      <div class="menu-segment">
        <ul class="labels">
-         <li class="title">Labels <span class="icon">+</span></li>
-         <li><a href="#">Dribbble <span class="ball pink"></span></a></li>
+         <li class="title menu-item-button" onclick="window.location.href = 'change_password_user.jsp';"><div>Change password</div></li>
+         <!--<li><a href="#">Dribbble <span class="ball pink"></span></a></li>
          <li><a href="#">Roommates <span class="ball green"></span></a></li>
-         <li><a href="#">Bills <span class="ball blue"></span></a></li>
+         <li><a href="#">Bills <span class="ball blue"></span></a></li>-->
        </ul>
      </div>
+     <!--
      <div class="separator"></div>
      <div class="menu-segment">
        <ul class="chat">
@@ -167,6 +168,7 @@ java.util.Date, java.text.SimpleDateFormat"%>
          <li><a href="#" class="italic-link">See offline list</a></li>
        </ul>
      </div>
+     -->
      <div class="bottom-padding"></div>
    </div>
  <div class="nano-pane"><div class="nano-slider" style="height: 116px; transform: translate(0px, 0px);"></div></div></aside>
