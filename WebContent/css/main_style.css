@@ -827,9 +827,23 @@
  
  li.email-account {
  	padding: 10px 0px 10px 0px !important;
+ 	margin: 0px -20px 0px -20px !important;
  	cursor: pointer;
  }
  
  li.email-account:hover {
  	background: #282d36;
+ }
+ 
+ li.email-account > div {
+ 	padding: 0px 0px 0px 20px;
+ }
+ 
+ li.title > span.add-account.icon {
+ 	font-size: 120%;
+ 	cursor: pointer;
+ }
+ 
+ li.title > span.add-account.icon:hover {
+ 	color: white;
  }

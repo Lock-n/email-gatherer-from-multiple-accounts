@@ -71,6 +71,10 @@ java.util.Date, java.text.SimpleDateFormat"%>
      <menu class="menu-segment">
      <form method="post" action="<%String uri = request.getRequestURI();%><%=uri.substring(uri.lastIndexOf("/")+1)%>" id="select_email_accounts">
 		<ul>
+			<li class="title">
+				Accounts
+				<span class="icon add-account" onclick="window.location.replace('register_new_email_account.jsp');">+</span>
+			</li>
 		  <!--
 		<li class="active"><a href="#">Inbox<span> (43)</span></a></li>
 		<li><a href="#">Important</a></li>
@@ -103,19 +107,21 @@ java.util.Date, java.text.SimpleDateFormat"%>
 					
 				%>
 			<li class="email-account<%=active%>">
-				<input type="hidden" id="server_send_address" value="<%=account.getServer_send_address()%>">
-			  	<input type="hidden" id="server_receive_address" value="<%=account.getServer_receive_address()%>">
-			  	<input type="hidden" id="server_send_port" value="<%=account.getServer_send_port()%>">
-			  	<input type="hidden" id="server_receive_port" value="<%=account.getServer_receive_port()%>">
-			  	<input type="hidden" id="server_send_protocol" value="<%=account.getServer_send_protocol()%>">
-			  	<input type="hidden" id="server_receive_protocol" value="<%=account.getServer_receive_protocol()%>">
-			  	<input type="hidden" id="password" value="<%=account.getPassword()%>">
-			  	<div class="checkbox-wrapper">
-			  		<input type="checkbox" name="selected_accounts" id="<%=i%>c" value="<%=account.getEmail()%>" <%=checked%>>
-			  		<label for="<%=i%>c" class="toggle">
-			  		</label>
+				<div>
+					<input type="hidden" id="server_send_address" value="<%=account.getServer_send_address()%>">
+				  	<input type="hidden" id="server_receive_address" value="<%=account.getServer_receive_address()%>">
+				  	<input type="hidden" id="server_send_port" value="<%=account.getServer_send_port()%>">
+				  	<input type="hidden" id="server_receive_port" value="<%=account.getServer_receive_port()%>">
+				  	<input type="hidden" id="server_send_protocol" value="<%=account.getServer_send_protocol()%>">
+				  	<input type="hidden" id="server_receive_protocol" value="<%=account.getServer_receive_protocol()%>">
+				  	<input type="hidden" id="password" value="<%=account.getPassword()%>">
+				  	<div class="checkbox-wrapper">
+				  		<input type="checkbox" name="selected_accounts" id="<%=i%>c" value="<%=account.getEmail()%>" <%=checked%>>
+				  		<label for="<%=i%>c" class="toggle">
+				  		</label>
+				  	</div>
+				  	<span><%=account.getEmail()%></span>
 			  	</div>
-			  	<span><%=account.getEmail()%></span>
 			</li>
 				<%
 			}
