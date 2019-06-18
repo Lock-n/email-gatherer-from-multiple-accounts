@@ -10,7 +10,9 @@
   <title>Enviar Email</title>
   <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-
+    
+	<!-- Include stylesheet -->
+	<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
   
       <link rel="stylesheet" href="./css/style.css">
 
@@ -19,7 +21,8 @@
 
 <body>
 
-  <div class="form">
+
+  	<div class="form">
       
       <!--
       <ul class="tab-group">
@@ -32,7 +35,7 @@
         <div >   
           <h1>Envie um email</h1>
           
-          <form action="send_email_b.jsp" method="post">
+          <form action="send_email_b.jsp" method="post" id="form">
           
            
           <div class="field-wrap">
@@ -83,12 +86,23 @@
             <input type="text" name="destinocco" id="destinocco" />
           </div>
           
-           <div class="field-wrap">
-            <label>
-             Texto<span class="req">*</span>
+           <div class="field-wrap" id="editor">
+            <!--<label>
+             Texto<span class="req"></span>
             </label>
-            <textarea type="text" name="texto" id="texto" cols="40" rows="5" required autocomplete="off"/></textarea>
+            <textarea type="text" name="texto" id="texto" cols="40" rows="5" required autocomplete="off"/></textarea>-->
           </div>
+          <input type="hidden" name="texto" id="texto">
+          
+          	<!-- Include the Quill library -->
+			<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+			<!-- Initialize Quill editor -->
+			<script>
+  			var quill = new Quill('#editor', {
+    			theme: 'snow'
+  			});
+			</script>
           
            <div class="field-wrap">
             <label>
@@ -101,13 +115,13 @@
             <label>
               Anexo
             </label>
-            <input type="file" name="anexo" multiple = "multiple" id="anexo" size="50">
+            <input type="file" name="anexo" id="anexo" size="50">
           </div>
           
          
          
          
-          <button type="submit" class="button button-block"/>Enviar</button>
+          <button class="button button-block" onclick="$('input#texto[type=hidden]').val($('div#editor > div.ql-editor').html()); $('form#form').submit();"/>Enviar</button>
           
           </form>
 

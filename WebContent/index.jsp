@@ -26,7 +26,7 @@
       
       <div class="tab-content">
         <div id="signup">   
-          <h1>Cadastre se</h1>
+          <h1>Cadastre-se</h1>
           
           <form action="sign_up_new_user_b.jsp" method="post">
 

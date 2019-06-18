@@ -6,8 +6,12 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %> 
 
 <%
+if (session.getAttribute("name") == null) {
+	response.sendRedirect("index.jsp");
+	return;
+}
 
-String result ="Nao entrou"; 
+String result ="<script>alert('Erro ao enviar a mensagem, tente novamente!');</script>"; 
 String texto = request.getParameter("texto"); 
 if(texto != null && !texto.equals(""))
 {
@@ -106,7 +110,7 @@ if(texto != null && !texto.equals(""))
        
        multipart.addBodyPart(messageBodyPart); 
        
-       if (filesname != null && filesname.trim() != "") {
+       if (filesname != null && !filesname.trim().isEmpty()) {
            for (int i = 0; i < vetFiles.length; i++) 
            {
                MimeBodyPart attachPart = new MimeBodyPart();
@@ -121,29 +125,34 @@ if(texto != null && !texto.equals(""))
 
                 multipart.addBodyPart(attachPart);
            }
+       }
        
+       if(tipo.equals("html")) {
+    	   MimeBodyPart bodyPart = new MimeBodyPart();
+    	   bodyPart.setContent(texto, "text/html");
+    	   
+    	   multipart.addBodyPart(bodyPart, 0);
+       }    
+       //message.setContent(m_body,"text/plain");
        
-       if(tipo.equals("html"))
-       		message.setContent(assunto, "text/html"); //body, "text/html"    
-       		//message.setContent(m_body,"text/plain");
-       
-       else
-       		message.setContent(multipart); 
+       message.setContent(multipart); 
        
        Transport transport = mailSession.getTransport("smtp");
        
-       transport.connect("smtp.gmail.com", name_email, senha);
+       transport.connect(contaE.getServer_send_address(), name_email, senha);
        transport.sendMessage(message, message.getAllRecipients());
        transport.close();
        
        
        String title = "Enviar email"; 
-       result = "Mensagem enviada com sucesso!"; 
+       result = "<script>alert('Mensagem enviada com sucesso!');" +
+       "</script>";
        
-       }}
+       response.sendRedirect("main.jsp");
+       }
     catch (MessagingException mex) { 
-       mex.printStackTrace(); 
-       result = "Erro no envio da mensagem. Tente novamente!"; 
+       //result = "<script>alert('Erro ao enviar a mensagem, tente novamente!');</script>";
+       mex.printStackTrace();
    }
 }
  %> 
@@ -154,7 +163,7 @@ if(texto != null && !texto.equals(""))
 <body> 
 <center> <h1>Enviando arquivo usando JSP...</h1> </center> 
 <p align="center"> 
-<% out.println("Resultado: " + result + "\n");%> 
+<%= "Resultado: " + result + "\n" %> 
 </p>
 </body>
 </html>
