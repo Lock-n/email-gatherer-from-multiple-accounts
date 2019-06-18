@@ -42,7 +42,7 @@
 				}
 				else
 				{
-					response.sendRedirect("index.jsp?error=true");
+					response.sendRedirect("index.jsp?error=Senha%20incorreta");
 				}
 			}
 			else
