@@ -28,7 +28,7 @@
      			(server_receive_ports == null) || (name_user == null)
      			)
      		{
-     			response.sendRedirect("register_new_email_account.jsp?error=Dados incompletos");
+     			response.sendRedirect("register_new_email_account.jsp?error=Dados%20incompletos");
      			return;
      		}     			
      		
