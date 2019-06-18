@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="bd.daos.*, bd.dbos.*" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="bd.daos.*, bd.dbos.*, java.util.Iterator, java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Por favor aguarde</title>
 </head>
 <body>
@@ -37,6 +37,21 @@
            	EmailAccount contaE = new EmailAccount(email, password, server_send_address, server_receive_address, server_send_protocol, server_receive_protocol, server_send_port, server_receive_port, name_user);
           	
       		EmailAccounts.alterar(contaE);
+      		
+			ArrayList<EmailAccount> contasE = (ArrayList<EmailAccount>)session.getAttribute("contasE");
+			
+			Iterator<EmailAccount> it = contasE.iterator();
+			for (int i = 0; it.hasNext(); i++) {
+				EmailAccount account = it.next();
+				
+				if (account.getEmail().equals(email)) {
+					contasE.remove(i);
+					contasE.add(contaE);
+				}
+			}
+			
+			session.setAttribute("contasE", contasE);
+			
           	response.sendRedirect("main.jsp");
           	return;
           }
@@ -44,13 +59,5 @@
                erro.printStackTrace();
                response.sendRedirect("main.jsp?error=Erro%20ao%20alterar%20conta");
                return;
-     %>
-          <p>Erro ao alterar conta, tente novamente mais tarde.</p>
-     <%
           }
      %>
-	
-
-
-</body>
-</html>

@@ -35,7 +35,7 @@
         <div >   
           <h1>Envie um email</h1>
           
-          <form action="send_email_b.jsp" method="post" id="form">
+          <form action="send_email_b.jsp" method="post" id="form" enctype="multipart/form-data">
           
            
           <div class="field-wrap">
@@ -104,18 +104,18 @@
   			});
 			</script>
           
-           <div class="field-wrap">
+           <!--<div class="field-wrap">
             <label>
               Tipo
             </label>
             <input type="text" name="tipo" id="tipo" />
-          </div>
+          </div>-->
           
            <div class="field-wrap">
             <label>
               Anexo
             </label>
-            <input type="file" name="anexo" id="anexo" size="50">
+            <input type="file" multiple="multiple" name="anexo" id="anexo" size="50">
           </div>
           
          

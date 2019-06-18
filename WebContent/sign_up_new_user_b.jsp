@@ -20,20 +20,20 @@
 				return;
 			}
 			
-			User usuario= new User(nome, senha);
+			User usuario = new User(nome, senha);
 			
 			Users.incluir(usuario);
 			
 			MeuResultSet resultado= EmailAccounts.getEmailAccountsByUser(nome);
 			EmailAccount contaE;
 			ArrayList<EmailAccount> contasE = new ArrayList<EmailAccount>();
-			do{
+			while(resultado.next()){
 				contaE = new EmailAccount(resultado.getString("email"), resultado.getString("password"), resultado.getString("server_send_address"), 
 		        		   resultado.getString("server_receive_address"), resultado.getString("server_send_protocol"),
 		        		   resultado.getString("server_receive_protocol"), resultado.getInt("server_send_port"),
 		        		   resultado.getInt("server_receive_port"), resultado.getString("name_user"));
 				contasE.add(contaE);
-			}while(resultado.next());
+			}
 			
 			session.setAttribute("name", nome);
 			session.setAttribute("contasE", contasE);
@@ -44,11 +44,5 @@
 			erro.printStackTrace();
 			response.sendRedirect("index.jsp?error=Erro%20registrando%20usuario");
 			return;
-	%>
-			<p>Erro ao cadastrar usuario, tente novamente mais tarde.</p>
-	<%
 		}
-	%>
-
-</body>
-</html>
+%>

@@ -49,13 +49,5 @@
                erro.printStackTrace();
                response.sendRedirect("main.jsp?error=Erro ao cadastrar nova conta de email");
                return;
-     %>
-          <p>Erro ao cadastrar conta, tente novamente mais tarde.</p>
-     <%
           }
      %>
-	
-
-
-</body>
-</html>

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <% if (session.getAttribute("name") == null) { response.sendRedirect("index.jsp"); return; }%>
 <!DOCTYPE html>
 <html lang="en" >
@@ -50,14 +50,14 @@
           
            <div class="field-wrap">
             <label>
-             Novo endereço do servidor de envio<span class="req">*</span>
+             Novo endereÃ§o do servidor de envio<span class="req">*</span>
             </label>
             <input type="text" id="server_address" name="server_send_address" value="<%= request.getParameter("server_send_address")%>" required autocomplete="off"/>
           </div>
           
            <div class="field-wrap">
             <label>
-              Novo endereço do servidor de recepcao<span class="req">*</span>
+              Novo endereÃ§o do servidor de recepcao<span class="req">*</span>
             </label>
             <input type="text" id="server_address" name="server_receive_address" value="<%= request.getParameter("server_receive_address")%>" required autocomplete="off"/>
           </div>

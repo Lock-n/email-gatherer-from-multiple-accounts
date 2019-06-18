@@ -176,8 +176,8 @@ public class EmailAccounts
 
             MeuResultSet resultado = (MeuResultSet)BDSQLServer.COMANDO.executeQuery ();
 
-            if (!resultado.first())
-                throw new Exception ("Usuario nao cadastrado");
+            /*if (!resultado.first())
+                throw new Exception ("Usuario nao cadastrado");*/
 
             
             return resultado;

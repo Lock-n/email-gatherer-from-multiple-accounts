@@ -28,11 +28,5 @@
 			erro.printStackTrace();
 			response.sendRedirect("change_password_user.jsp?error=Erro%20ao%20tentar%20alterar%20senha");
 			return;
-	%>
-			<p>Erro ao alterar senha de usuario, tente novamente mais tarde.</p>
-	<%
 		}
 	%>
-
-</body>
-</html>

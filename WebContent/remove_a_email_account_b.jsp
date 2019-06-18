@@ -36,18 +36,9 @@
           	response.sendRedirect("main.jsp");
           	return;
      	}
-          catch(Exception erro){
-               erro.printStackTrace();
-               
-               response.sendRedirect("main.jsp?error=Erro%20ao%20excluir%20conta%20de%20email");
-               return;
+        catch(Exception erro){
+           erro.printStackTrace();
+           response.sendRedirect("main.jsp?error=Erro%20ao%20excluir%20conta%20de%20email");
+           return;
+        }
 	%>
-
-          <p>Erro ao excluir conta, tente novamente mais tarde.</p>
-     <%
-          }
-     %>
-
-
-</body>
-</html>
