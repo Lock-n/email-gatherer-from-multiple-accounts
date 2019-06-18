@@ -14,7 +14,7 @@
 			String senha = request.getParameter("nova_senha");
 			
 			if ((nome == null) || (senha == null)) {
-				response.sendRedirect("change_password_user.jsp?error=Dados incompletos");
+				response.sendRedirect("change_password_user.jsp?error=Dados%20incompletos");
 				return;
 			}
 		
@@ -26,7 +26,7 @@
 		}
 		catch(Exception erro){
 			erro.printStackTrace();
-			response.sendRedirect("change_password_user.jsp?error=Erro");
+			response.sendRedirect("change_password_user.jsp?error=Erro%20ao%20tentar%20alterar%20senha");
 			return;
 	%>
 			<p>Erro ao alterar senha de usuario, tente novamente mais tarde.</p>

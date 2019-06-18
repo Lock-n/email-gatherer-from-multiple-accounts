@@ -26,7 +26,7 @@
          			(server_send_protocol == null) || (server_receive_protocol == null) || (server_send_ports == null) ||
          			(server_receive_ports == null) || (name_user == null)
          			) {
-       			response.sendRedirect("change_email_account.jsp?error=Dados incompletos");
+       			response.sendRedirect("change_email_account.jsp?error=Dados%20incompletos");
        			return;
        		}
          		
@@ -42,7 +42,7 @@
           }
           catch(Exception erro){
                erro.printStackTrace();
-               response.sendRedirect("main.jsp?error=Erro ao alterar conta");
+               response.sendRedirect("main.jsp?error=Erro%20ao%20alterar%20conta");
                return;
      %>
           <p>Erro ao alterar conta, tente novamente mais tarde.</p>

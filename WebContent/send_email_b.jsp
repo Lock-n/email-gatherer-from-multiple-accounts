@@ -26,7 +26,7 @@ if(texto != null && !texto.equals(""))
    	
    	if ((assunto == null) || (filesname == null) || (tipo == null) || (name_email == null))
    	{
-   		response.sendRedirect("send_email.jsp?error=Dados incompletos ou inválidos");
+   		response.sendRedirect("send_email.jsp?error=Dados%20incompletos%20ou%20inválidos");
    		return;
    	}
    		
@@ -49,7 +49,7 @@ if(texto != null && !texto.equals(""))
 	}  	
 
    	if (contaE == null) {
-   		response.sendRedirect("send_email.jsp?error=Dados incompletos ou inválidos");
+   		response.sendRedirect("send_email.jsp?error=Dados%20incompletos%20ou%20inválidos");
    		return;
    	}
    	

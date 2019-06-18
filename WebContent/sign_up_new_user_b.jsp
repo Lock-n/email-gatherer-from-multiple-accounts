@@ -16,7 +16,7 @@
 			String senha = request.getParameter("senha");
 		
 			if (nome == null || senha == null) {
-				response.sendRedirect("index.jsp?error=true");
+				response.sendRedirect("index.jsp?error=Dados%20Incompletos");
 				return;
 			}
 			
@@ -42,7 +42,7 @@
 		}
 		catch(Exception erro){
 			erro.printStackTrace();
-			response.sendRedirect("index.jsp?error=true");
+			response.sendRedirect("index.jsp?error=Erro%20registrando%20usuario");
 			return;
 	%>
 			<p>Erro ao cadastrar usuario, tente novamente mais tarde.</p>
